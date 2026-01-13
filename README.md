@@ -9,18 +9,35 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 
 
 <div align="center">
-    <img src="https://arxiv.org/html/2601.05552v1/x1.png" width="80%">
+    <img src="./assets/Compare-UniADet.jpg" width="80%">
 </div>
 
-- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple, parameter-efficient, and highly general language-free** framework for universal anomaly detection.
+- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**, **parameter-efficient**, **general**, and **effective** framework for universal anomaly detection.
 - We fully **decouple global anomaly classification and local anomaly segmentation** across multi-scale hierarchical features, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
 - Comprehensive experiments conclusively validate that our approach achieves **state-of-the-art zero-shot and few-shot performance**. Notably, our few-shot UniADet is **the first** to outperform full-shot state-of-the-art.
 
 ## UniADet Framework
 
 <div align="center">
-    <img src="https://arxiv.org/html/2601.05552v1/x2.png" width="80%">
+    <img src="./assets/UniADet-Framework.jpeg" width="80%">
 </div>
+
+
+## Comparison with State-of-the-Arts
+
+| Methods | Shots | MVTec | VisA  | Real-IAD |
+| :--- | :---: | :--- | :--- | :--- |
+| UniADet$^{‡}$ (ours)| 0 | 93.5  / 50.9 | 91.3 /32.7 | 82.5 / 43.1 |
+| UniADet$^{‡}$ (ours) | 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
+| UniADet$^{‡}$ (ours)| 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
+| UniADet$^{‡}$ (ours)| 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
+| [UniVAD](https://github.com/FantasticGNU/UniVAD) (CVPR 25)  | 1 | 97.8 / 55.6 | 93.5 / 42.8 | 85.1 / 37.6 |
+| [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) (AAAI 26)  | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
+|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) (AAAI 26)  | 2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
+|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) (AAAI 26)  | 4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
+| [MetaUAS](https://github.com/gaobb/MetaUAS) (NeurIPS 24) | 1 | 90.7 / 59.3 | 81.2 / 42.7 | - / - |
+| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) (CVPR 25)  | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
+| [UniAD](https://github.com/zhiyuanyou/UniAD) (NeurIPS 24)| full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
 
 ## Ablation Studies
 Ablation studies about different components.
@@ -49,6 +66,7 @@ If you find this work useful in your research, please consider citing:
   booktitle={arXiv:2601.05552},
   year={2026}
 }
+```
 
 ## Star History
 
