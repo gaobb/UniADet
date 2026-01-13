@@ -39,16 +39,32 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 | [Dinomaly](https://github.com/guojiajeremy/Dinomaly) (CVPR 25)  | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
 | [UniAD](https://github.com/zhiyuanyou/UniAD) (NeurIPS 24)| full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
 
+## Complexity and Efficiency Comparisons
+
+| Shots | Methods | Models | Input Size | # Params (M) | Inf. Time (ms) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **0** | AdaCLIP | CLIP ViT-L/14@336px | 518×518 | 428.8 + 1.1e+1 | 107.4 |
+| **0** | AnomalyCLIP | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 70.7 |
+| **0** | Bayes-PFL | CLIP ViT-L/14@336px | 518×518 | 427.9 + 2.7e+1 | 154.9 |
+| **0** | AdaptCLIP-Zero | CLIP ViT-L/14@336px | 518×518 | 427.9 + 6.0e-1 | 57.5 |
+| **0** | **UniADet†** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-3** | **15.7** |
+| **0** | **UniADet⋆** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-3** | **41.9** |
+| **1** | InCtrl | CLIP ViT-B-16+240 | 240×240 | 208.4 + 3.0e-1 | 59.0 |
+| **1** | AnomalyCLIP+ | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 76.2 |
+| **1** | AdaptCLIP | CLIP ViT-L/14@336px | 518×518 | 342.9 + 1.8e+0 | 58.7 |
+| **1** | **UniADet†** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-3** | **22.4** |
+| **1** | **UniADet⋆** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-3** | **48.4** |
+
 ## Ablation Studies
 Ablation studies about different components.
-| No | DC | SD | HF | CA | Shot | MVTec  | VisA  |
-| :-- | :--: | :--: | :--: | :--: | :--: | :-- | :-- |
-| 0 | ✗ | ✗ | ✗ | - | 0 | 85.4 / 36.4 | 77.9 / 26.1 |
-| 1 | ✓ | ✗ | ✗ | - | 0 | 91.8 / 38.3 | 85.9 / 27.2 |
-| 2 | ✓ | ✓ | ✗ | - | 0 | 92.2 / 40.7 | 86.0 / 27.6 |
-| 3 | ✓ | ✓ | ✓ | - | 0 | 92.4 / 42.8 | 88.0 / 28.0 |
-| 4 | ✓ | ✓ | random | - | 0 | 91.3 / 41.5 | 87.5 / 26.6 |
-| 5 | ✓ | ✓ | ✓ | - | 1 | **95.9 / 54.6** | **91.3 / 32.5** |
+| No | DCS| DHF| CCA | Shot | MVTec  | VisA  |
+| :-- | :--: | :--: | :--: | :--: | :-- | :-- |
+| 0 | ✗ | ✗ | ✗ |  0 | 85.4 / 36.4 | 77.9 / 26.1 |
+| 1 | ✓ | ✗ | ✗ |  0 | 91.8 / 38.3 | 85.9 / 27.2 |
+| 2 | ✓ | ✓ | ✗ |  0 | 92.2 / 40.7 | 86.0 / 27.6 |
+| 3 | ✓ | ✓ | ✓ |  0 | 92.4 / 42.8 | 88.0 / 28.0 |
+| 4 | ✓ | ✓ | random |  0 | 91.3 / 41.5 | 87.5 / 26.6 |
+| 5 | ✓ | ✓ | ✓ |  1 | **95.9 / 54.6** | **91.3 / 32.5** |
 
 
 ## ToDo List
