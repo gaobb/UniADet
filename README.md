@@ -37,7 +37,7 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 | [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
-| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | 1 | 90.7 / 59.3 | 81.2 / 42.7 | - / - |
+| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
 | [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
 | [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
 
