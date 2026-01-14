@@ -27,9 +27,9 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 
 | Methods | Venue | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: | :--- | :--- | :--- | :--- |
-| UniADet$^{‡}$ | ours| 0 | 93.5  / 50.9 | 91.3 /32.7 | 82.5 / 43.1 |
+| UniADet$^{‡}$ | ours| 0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
 | [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
-| [Bayes-PFL](https://github.com/xiaozhen228/Bayes-PFL) | CVPR 25| 0 |92.5 / 48.3 | 87.0 /29.8 | 70.0 / 27.6| 
+| [Bayes-PFL](https://github.com/xiaozhen228/Bayes-PFL) | CVPR 25| 0 |92.5 / 48.3 | 87.0 / 29.8 | 70.0 / 27.6| 
 | UniADet$^{‡}$ | ours| 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
 | UniADet$^{‡}$ | ours| 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
 | UniADet$^{‡}$ | ours| 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
