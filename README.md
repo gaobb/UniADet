@@ -51,15 +51,15 @@ Note: The performance is mesured by Image-AUROC / Pixel-AUPR.
 | **0** | AnomalyCLIP | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 70.7 |
 | **0** | Bayes-PFL | CLIP ViT-L/14@336px | 518×518 | 427.9 + 2.7e+1 | 154.9 |
 | **0** | AdaptCLIP-Zero | CLIP ViT-L/14@336px | 518×518 | 427.9 + 6.0e-1 | 57.5 |
-| **0** | **UniADet$^{†}$** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
-| **0** | **UniADet$^{‡}$** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **41.9** |
+| **0** | **UniADet$ ^{†} $** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
+| **0** | **UniADet$ ^{‡} $** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **41.9** |
 | **1** | InCtrl | CLIP ViT-B-16+240 | 240×240 | 208.4 + 3.0e-1 | 59.0 |
 | **1** | AnomalyCLIP+ | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 76.2 |
 | **1** | AdaptCLIP | CLIP ViT-L/14@336px | 518×518 | 342.9 + 1.8e+0 | 58.7 |
-| **1** | **UniADet$^†$** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
-| **1** | **UniADet$^{‡}$** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
+| **1** | **UniADet$ ^† $** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
+| **1** | **UniADet$ ^{‡} $** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
 
-Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet$^†$ and and UniADet$^{‡}$, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet$^†$ and UniADet$^{‡}$, respectively.
+Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet$ ^† $ and UniADet$ ^{‡} $, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet$ ^† $ and UniADet$ ^{‡} $, respectively.
 
 ## Ablation Studies
 Ablation studies about different components.
