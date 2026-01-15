@@ -59,6 +59,8 @@ Note: The performance is mesured by Image-AUROC / Pixel-AUPR.
 | **1** | **UniADet$^†$** | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
 | **1** | **UniADet$^{‡}$** | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
 
+Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet$^†$ and and UniADet$^{‡}$, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet$^†$ and UniADet$^{‡}$, respectively.
+
 ## Ablation Studies
 Ablation studies about different components.
 | No | DCS| DHF| CAA | Shot | MVTec  | VisA  |
