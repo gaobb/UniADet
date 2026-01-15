@@ -27,12 +27,12 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 
 | Methods | Venue | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: | :--- | :--- | :--- | :--- |
-| UniADet$^{‡}$ | ours| 0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
+| UniADet $ ^‡$ | ours| 0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
 | [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
 | [Bayes-PFL](https://github.com/xiaozhen228/Bayes-PFL) | CVPR 25| 0 |92.5 / 48.3 | 87.0 / 29.8 | 70.0 / 27.6| 
-| UniADet$^{‡}$ | ours| 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
-| UniADet$^{‡}$ | ours| 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
-| UniADet$^{‡}$ | ours| 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
+| UniADet $^‡$ | ours| 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
+| UniADet $^‡$ | ours| 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
+| UniADet $^‡$ | ours| 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
 | [UniVAD](https://github.com/FantasticGNU/UniVAD) |CVPR 25  | 1 | 97.8 / 55.6 | 93.5 / 42.8 | 85.1 / 37.6 |
 | [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
@@ -51,13 +51,13 @@ Note: The performance is mesured by Image-AUROC / Pixel-AUPR.
 | **0** | AnomalyCLIP | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 70.7 |
 | **0** | Bayes-PFL | CLIP ViT-L/14@336px | 518×518 | 427.9 + 2.7e+1 | 154.9 |
 | **0** | AdaptCLIP-Zero | CLIP ViT-L/14@336px | 518×518 | 427.9 + 6.0e-1 | 57.5 |
-| **0** | **UniADet** $ ^{†} $  | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
-| **0** | **UniADet** $ ^{‡} $ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **41.9** |
+| **0** | **UniADet** $ ^† $  | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
+| **0** | **UniADet** $ ^‡ $ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **41.9** |
 | **1** | InCtrl | CLIP ViT-B-16+240 | 240×240 | 208.4 + 3.0e-1 | 59.0 |
 | **1** | AnomalyCLIP+ | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 76.2 |
 | **1** | AdaptCLIP | CLIP ViT-L/14@336px | 518×518 | 342.9 + 1.8e+0 | 58.7 |
 | **1** | **UniADet** $ ^† $ | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
-| **1** | **UniADet** $ ^{‡} $ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
+| **1** | **UniADet** $ ^‡ $ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
 
 Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet $ ^† $ and UniADet $ ^{‡} $, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet $ ^† $ and UniADet $ ^{‡} $, respectively.
 
