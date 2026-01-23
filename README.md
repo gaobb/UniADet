@@ -2,6 +2,8 @@
 
 > Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://arxiv.org/abs/2601.05552), 2026.
 
+[中文公众号报道](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
+
 
 ## Introduction 
 UniADet, a **language-free** framework that demonstrates superior performance while achieving remarkable simplicity and efficiency.
