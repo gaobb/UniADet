@@ -2,8 +2,8 @@
 
 > Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://arxiv.org/abs/2601.05552), 2026.
 
-[“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
-["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
+- [“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
+- ["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
 
 ## Introduction 
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
@@ -27,7 +27,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 
 | Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
-| **UniADet** $^‡$ | ours| ✓ |0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
+| **UniADet** $^‡$ | ours| ✓ |0 | **93.5  / 50.9** | **91.3 / 32.7** | **82.5 / 43.1** |
 | [WinCLIP](https://github.com/zqhang/Accurate-WinCLIP-pytorch) | CVPR 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
 | [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
 | [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | ✗ | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
