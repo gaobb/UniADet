@@ -2,13 +2,11 @@
 
 > Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://arxiv.org/abs/2601.05552), 2026.
 
-[中文公众号报道](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
-
+[“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
+["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
 
 ## Introduction 
-UniADet, a **language-free** framework that demonstrates superior performance while achieving remarkable simplicity and efficiency.
-
-
+UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
 <div align="center">
     <img src="./assets/Compare-UniADet.jpg" width="80%">
@@ -27,23 +25,40 @@ UniADet, a **language-free** framework that demonstrates superior performance wh
 
 ## Comparison with State-of-the-Arts
 
-| Methods | Venue | Shots | MVTec | VisA  | Real-IAD |
-| :--- | :---: | :--- | :--- | :--- | :--- |
-| UniADet $^‡$ | ours| 0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
-| [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
-| [Bayes-PFL](https://github.com/xiaozhen228/Bayes-PFL) | CVPR 25| 0 |92.5 / 48.3 | 87.0 / 29.8 | 70.0 / 27.6| 
-| UniADet $^‡$ | ours| 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
-| UniADet $^‡$ | ours| 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
-| UniADet $^‡$ | ours| 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
-| [UniVAD](https://github.com/FantasticGNU/UniVAD) |CVPR 25  | 1 | 97.8 / 55.6 | 93.5 / 42.8 | 85.1 / 37.6 |
-| [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
-|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
-|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | 4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
-| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
-| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
-| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+| Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
+| :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
+| **UniADet** $^‡$ | ours| ✓ |0 | 93.5  / 50.9 | 91.3 / 32.7 | 82.5 / 43.1 |
+| [WinCLIP](https://github.com/zqhang/Accurate-WinCLIP-pytorch) | CVPR 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
+| [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
+| [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | ✗ | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
+| [AdaCLIP](https://github.com/caoyunkang/AdaCLIP) | ECCV 24 | ✗ | 0 | 90.7 / 39.1 |  81.7 / 31.0 | 73.3 / 30.5 |
+| [VCPCLIP](https://github.com/xiaozhen228/VCP-CLIP) | ECCV 24| ✗ | 0 | 92.1 / 49.4 | 83.8 / 30.1 | - |
+| [Bayes-PFL](https://github.com/xiaozhen228/Bayes-PFL) | CVPR 25| ✗ | 0 |92.5 / 48.3 | 87.0 / 29.8 | 70.0 / 27.6| 
+| [AA-CLIP](https://github.com/Mwxinnn/AA-CLIP) | CVPR 25 | ✗ | 0 | 90.5 / - | 84.6 / - | -|
+| [FE-CLIP](https://openaccess.thecvf.com/content/ICCV2025/papers/Gong_FE-CLIP_Frequency_Enhanced_CLIP_Model_for_Zero-Shot_Anomaly_Detection_and_ICCV_2025_paper.pdf)   | ICCV 25 | ✗ | 0 | 91.9 / - | 84.6 / - | -|
+| [FAPrompt](https://github.com/mala-lab/FAPrompt) | ICCV 25 | ✗ | 0 | 91.9 / - | 84.6 / - | -|
+| [RareCLIP](https://github.com/hjf02/RareCLIP) | ICCV 25 | ✗ | 0 |91.5 / 46.1 | 86.1 / 27.0 | - |
+| [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ | 0 | 93.5 / 38.3 | 84.8 / 26.1 | 74.2 / 28.2 |
 
-Note: The performance is mesured by Image-AUROC / Pixel-AUPR.
+
+| Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
+| :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
+| **UniADet** $^‡$ | ours | ✓ | 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
+| **UniADet** $^‡$ | ours| ✓ | 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
+| **UniADet** $^‡$ | ours| ✓ | 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
+| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | ✗ | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
+| [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 4 | 92.8 / 54.5 | 92.6 / 32.2 | -|
+| [PromptAD](https://github.com/FuNz-0/PromptAD) | CVPR 24 | ✗ | 4 | 96.6 / 52.9 | 89.1 / 31.5 | - |
+| [UniVAD](https://github.com/FantasticGNU/UniVAD) |CVPR 25  | ✗ | 1 | 97.8 / 55.6 | 93.5 / 42.8 | 85.1 / 37.6 |
+| [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
+|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ |2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
+|  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ |4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
+| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | ✗ | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
+| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| ✗ |full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+
+Note1: The performance is mesured by Image-AUROC / Pixel-AUPR.
+
+Note2: If you find that any existing zero-shot/few-shot AD methods are missing from the table above, please feel free to open an issue so we can add them.
 
 ## Complexity and Efficiency Comparisons
 
@@ -74,7 +89,7 @@ Ablation studies about different components.
 | 4 | ✓ | ✓ | random |  0 | 91.3 / 41.5 | 87.5 / 26.6 |
 | 5 | ✓ | ✓ | ✓ |  1 | **95.9 / 54.6** | **91.3 / 32.5** |
 
-Note: The ablation studies are conducted by UniADet$^†$ (i.e., using CLIP ViT-L/14@336px).
+Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L/14@336px).
 
 
 ## ToDo List
