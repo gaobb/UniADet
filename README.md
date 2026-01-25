@@ -46,15 +46,15 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | **UniADet** $^‡$ | ours | ✓ | 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
 | **UniADet** $^‡$ | ours| ✓ | 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
 | **UniADet** $^‡$ | ours| ✓ | 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
-| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | ✗ | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
+| [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | ✓ | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
 | [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 4 | 92.8 / 54.5 | 92.6 / 32.2 | -|
 | [PromptAD](https://github.com/FuNz-0/PromptAD) | CVPR 24 | ✗ | 4 | 96.6 / 52.9 | 89.1 / 31.5 | - |
 | [UniVAD](https://github.com/FantasticGNU/UniVAD) |CVPR 25  | ✗ | 1 | 97.8 / 55.6 | 93.5 / 42.8 | 85.1 / 37.6 |
 | [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ |2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  | ✗ |4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
-| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | ✗ | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
-| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| ✗ |full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | ✓ | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
+| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| ✓ |full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
 
 Note1: The performance is mesured by Image-AUROC / Pixel-AUPR.
 
