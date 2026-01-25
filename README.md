@@ -29,7 +29,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
 | **UniADet** $^‡$ | ours| ✓ |0 | **93.5  / 50.9** | **91.3 / 32.7** | **82.5 / 43.1** |
 | [WinCLIP](https://github.com/zqhang/Accurate-WinCLIP-pytorch) | CVPR 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
-| [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
+| [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 | ✗ | 0 | 86.1 / - | 78.0 / - | - | -|
 | [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 | ✗ | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
 | [AdaCLIP](https://github.com/caoyunkang/AdaCLIP) | ECCV 24 | ✗ | 0 | 90.7 / 39.1 |  81.7 / 31.0 | 73.3 / 30.5 |
 | [VCPCLIP](https://github.com/xiaozhen228/VCP-CLIP) | ECCV 24| ✗ | 0 | 92.1 / 49.4 | 83.8 / 30.1 | - |
