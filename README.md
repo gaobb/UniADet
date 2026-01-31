@@ -22,7 +22,19 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
     <img src="./assets/UniADet-Framework.jpeg" width="80%">
 </div>
 
+## 📊 Language-Free UniADet with  Different Foundation Models
 
+| Backbone | Shot | MVTec-AD | VisA | Real-IAD |
+| :--- | :---: | :---: | :---: | :---: |
+| **CLIP** (ViT-L/14@336px)      | **0** | 92.4 / 42.8 | 88.0 / 28.0 | 78.6 / 33.6 |
+| **CLIP** (ViT-L/14@336px)      | **4** | 97.7 / 58.8 | 93.3 / 36.7 | 84.3 / 37.2 |
+| | | | | |
+| **DINOv2** (Register ViT-L/14) | **0** | 93.5 / 50.9 | 91.3 / **32.7** | **82.5 / 43.1** |
+| **DINOv2** (Register ViT-L/14) | **4** | **98.7** / 65.4 | 96.9 / 45.2 | **90.3** / 48.5 |
+| | | | | |
+| **DINOv3** (ViT-L/16)          | **0** | **94.0 / 52.7** | **91.9** / 32.5 | 81.2 / 41.6 |
+| **DINOv3** (ViT-L/16)          | **4** | 98.2 / **69.0** | **97.1 / 45.5** | 88.5 / **49.8** |
+ 
 ## Comparison with State-of-the-Arts
 
 | Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
@@ -91,14 +103,14 @@ Ablation studies about different components.
 
 Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L/14@336px).
 
-## Comparison with Language-Dependent Zero-Shot ADs （e.g., AnomalyCLIP)
+## Comparison with Language-Dependent AnomalyCLIP
 - **Essential Differences**
   
 | Feature | AnomalyCLIP | **UniADet (Ours)** |
 | :--- | :--- | :--- |
 | **🧠 Paradigm** | 🔴 Language-Dependent | ✅ Language-Free |
-| **⚡  Dual-Decoupling** |  Shared Cls/Seg Weight $W$ | ✅  Decoupled Cls/Seg Weights $W_{cls}^l$, $W_{seg}^l$ |
-| **🏗️ Hierarchical Features** |  Single / Last Layer | ✅  Multi-Layer Features |
+| **⚡  Task Decoupling** |  Shared Cls/Seg Weight $W$ | ✅  Decoupled Cls/Seg Weights $W_{cls}$, $W_{seg}$ |
+| **🏗️ Hierarchical Decoupling** |  Single / Last Layer | ✅  Multi-Layer  Cls/Seg Weights  $W_{cls}^l$, $W_{seg}^l$|
 | **🤖 Backbones** |  CLIP Only |  ✅ CLIP, DINOv2-R, DINOv3 |
 | **📉 Params** | ⚠️  Text Encoder + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
 
@@ -111,7 +123,7 @@ Note2: A naive extension of AnomalyCLIP to multiple blocks leads to significant 
 | Feature | sdsdc  |
 | :--- | :--- |
 | **Core Objective** | Learning Normal / Anomaly Weights |
-| **Loss Function** | Identical Loss,  CE for Cls and  Focal + Dice for Seg |
+| **Loss Function** | CE for Cls and  Focal + Dice for Seg |
 | **Training Data** | Auxiliary Data (e.g., VisA or MVTec) |
 
 - **Performace on VisA**
