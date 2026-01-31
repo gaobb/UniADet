@@ -65,8 +65,12 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  | 1 | 94.5 / 53.7 | 90.5 / 38.9 | 81.8 / 36.6 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  |2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  |4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
-| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | $\color{red}{\checkmark}$ | full | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
-| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |full | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+
+| Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
+| :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
+| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | $\color{red}{\checkmark}$ | full train set | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
+| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |full train set| 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+| [MuSc](https://github.com/xrli-U/MuSc) |ICLR 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |full test set | 97.8 / 62.7 | 92.8 / 45.1 | - |
 
 Note1: The performance is mesured by Image-AUROC / Pixel-AUPR.
 
