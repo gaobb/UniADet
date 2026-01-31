@@ -76,6 +76,9 @@ Note1: The performance is mesured by Image-AUROC / Pixel-AUPR.
 
 Note2: If you find that any existing zero-shot/few-shot AD methods are missing from the table above, please feel free to open an issue so we can add them.
 
+Note3: MuSc is an Online algorithm that requires access to statistics from the entire test dataset to evaluate the current image.
+Therefore, it is not a strictly zero-shot AD.
+
 ## Complexity and Efficiency Comparisons
 
 | Shots | Methods | Models | Input Size | # Params (M) | Inf. Time (ms) |
