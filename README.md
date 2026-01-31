@@ -91,6 +91,40 @@ Ablation studies about different components.
 
 Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L/14@336px).
 
+## Comparison with Language-Dependent Zero-Shot ADs （e.g., AnomalyCLIP)
+- **Essential Differences**
+  
+| Feature | AnomalyCLIP | **UniADet (Ours)** |
+| :--- | :--- | :--- |
+| **🧠 Paradigm** | 🔴 Language-Dependent | ✅ Language-Free |
+| **⚡  Dual-Decoupling** |  Shared Cls/Seg Weight $W$ | ✅  Decoupled Cls/Seg Weights $W_{cls}^l$, $W_{seg}^l$ |
+| **🏗️ Hierarchical Features** |  Single / Last Layer | ✅  Multi-Layer Features |
+| **🤖 Backbones** |  CLIP Only |  ✅ CLIP, DINOv2-R, DINOv3 |
+| **📉 Params** | ⚠️  Text Encoder + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
+
+Note1: The [official AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) team has clarified that their initial multi-layer claim was a [code bug](https://github.com/zqhang/AnomalyCLIP/issues/18); the effective implementation relies only on the last layer.
+
+Note2: A naive extension of AnomalyCLIP to multiple blocks leads to significant performance degradation.
+
+- **Commonality**
+  
+| Feature | sdsdc  |
+| :--- | :--- |
+| **Core Objective** | Learning Normal / Anomaly Weights |
+| **Loss Function** | Identical Loss,  CE for Cls and  Focal + Dice for Seg |
+| **Training Data** | Auxiliary Data (e.g., VisA or MVTec) |
+
+- **Performace on VisA**
+  
+| Shots |  Backbones | AnomalyCLIP | **UniADet (Ours)** |
+| :--- | :--- | :--- | :--- |
+| 0-Shot    | CLIP     | 82.0 / 21.3   |  88.0 / 28.0 |
+| 0-Shot    | DINOv2-R | Not supported |  91.3 / 32.7 |
+| 0-Shot    | DINOv3   | Not supported |  91.9 / 32.5 |
+| 4-Shot    | CLIP     | Not supported |  93.3 / 36.7 |
+| 4-Shot    | DINOv2-R | Not supported |  96.9 / 45.2 |
+| 4-Shot    | DINOv3 | Not supported   |  97.1 / 45.5 |
+
 
 ## ToDo List
 - [ ] release pre-trained [UniADet models]()
