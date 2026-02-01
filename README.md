@@ -34,6 +34,8 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | | | | | |
 | **DINOv3** (ViT-L/16)          | **0** | **94.0 / 52.7** | **91.9** / 32.5 | 81.2 / 41.6 |
 | **DINOv3** (ViT-L/16)          | **4** | 98.2 / **69.0** | **97.1 / 45.5** | 88.5 / **49.8** |
+
+> Note: The performance is mesured by Image-AUROC / Pixel-AUPR, and the same below.
  
 ## Comparison with State-of-the-Arts
 
@@ -71,12 +73,12 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | $\color{red}{\checkmark}$ | full train set | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
 | [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |full train set| 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
 | [MuSc](https://github.com/xrli-U/MuSc) |ICLR 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |full test set | 97.8 / 62.7 | 92.8 / 45.1 | - |
-
-Note1: The performance is mesured by Image-AUROC / Pixel-AUPR.
-
-Note2: If you find that any existing zero-shot/few-shot AD methods are missing from the table above, please feel free to open an issue so we can add them.
-
-Note3: MuSc is an Online algorithm that requires access to statistics from the entire test dataset to evaluate the current image.
+> [!IMPORTANT] 
+> Note1: If you find that any existing zero-shot/few-shot AD methods are missing from the table above, please feel free to open an issue so we can add them.
+>
+> Note2: [Dinomaly](https://github.com/guojiajeremy/Dinomaly) and [UniAD](https://github.com/zhiyuanyou/UniAD) are multi-class unsupervised AD algorithms, and they require dataset-specific training with full normal images.
+>  
+> Note3: [MuSc](https://github.com/xrli-U/MuSc) is an Online algorithm that requires access to statistics from the entire test dataset to evaluate the current image.
 Therefore, it is not a strictly zero-shot AD.
 
 ## Complexity and Efficiency Comparisons
