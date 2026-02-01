@@ -129,7 +129,7 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 
 - **Commonality**
   
-| Feature | sdsdc  |
+| Feature | AnomalyCLIP & UniADet  |
 | :--- | :--- |
 | **Core Objective** | Learning Normal / Anomaly Weights |
 | **Loss Function** | CE for Cls and  Focal + Dice for Seg |
