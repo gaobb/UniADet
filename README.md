@@ -12,7 +12,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
     <img src="./assets/Compare-UniADet.jpg" width="80%">
 </div>
 
-- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**, **parameter-efficient**, **general**, and **effective** framework for universal anomaly detection.
+- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**, **efficient**, **effective** and **general** framework for universal anomaly detection.
 - We fully **decouple global anomaly classification and local anomaly segmentation** across multi-scale hierarchical features, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
 - Comprehensive experiments conclusively validate that our approach achieves **state-of-the-art zero-shot and few-shot performance**. Notably, our few-shot UniADet is **the first** to outperform full-shot state-of-the-art.
 
@@ -121,9 +121,11 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | **🤖 Backbones** |  CLIP Only |  ✅ CLIP, DINOv2-R, DINOv3 |
 | **📉 Params** | ⚠️  Text Encoder + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
 
-Note1: The [official AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) team has clarified that their initial multi-layer claim was a [code bug](https://github.com/zqhang/AnomalyCLIP/issues/18); the effective implementation relies only on the last layer.
+> [!IMPORTANT]
+> Note1: The [official AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) team has clarified that their initial multi-layer claim was a [code bug](https://github.com/zqhang/AnomalyCLIP/issues/18); the effective implementation relies only on the last layer.
+> 
+> Note2: A naive extension of AnomalyCLIP to multiple blocks leads to significant performance degradation.
 
-Note2: A naive extension of AnomalyCLIP to multiple blocks leads to significant performance degradation.
 
 - **Commonality**
   
