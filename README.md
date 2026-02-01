@@ -5,6 +5,17 @@
 - [“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
 - ["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
 
+## Contents
+* [Introduction](#introduction)
+* [UniADet Framework](#uniadet-framework)
+* [Language-Free UniADet with Different Foundation Models](#language-free-uniadet-with-different-foundation-models)
+* [Comparison with State-of-the-Arts](#comparison-with-state-of-the-arts)
+* [Complexity and Efficiency Comparisons](#complexity-and-efficiency-comparisons)
+* [Ablation Studies](#ablation-studies)
+* [Comparison with Language-Dependent AnomalyCLIP](#comparison-with-language-dependent-anomalyclip)
+* [ToDo List](#todo-list)
+* [Citation](#citation)
+  
 ## Introduction 
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
