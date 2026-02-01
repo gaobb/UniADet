@@ -23,7 +23,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
     <img src="./assets/Compare-UniADet.jpg" width="80%">
 </div>
 
-- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**, **efficient**, **effective** and **general** framework for universal anomaly detection.
+- We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**(language-free+dual-decoupling), **efficient**(0.015M or 0.02M learnable params), **effective** (SOTA zero-/few-shot) and **general** (support VLMs and Pure VMs) framework for universal anomaly detection.
 - We fully **decouple global anomaly classification and local anomaly segmentation** across multi-scale hierarchical features, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
 - Comprehensive experiments conclusively validate that our approach achieves **state-of-the-art zero-shot and few-shot performance**. Notably, our few-shot UniADet is **the first** to outperform full-shot state-of-the-art.
 
