@@ -130,7 +130,7 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | :--- | :--- | :--- |
 | **🧠 Paradigm** | 🔴 Language-Dependent | ✅ Language-Free |
 | **⚡  Task Decoupling** |  Shared Cls/Seg Weight $W$ | ✅  Decoupled Cls/Seg Weights $W_{cls}$, $W_{seg}$ |
-| **🏗️ Hierarchical Decoupling** |  Single / Last Layer | ✅  Multi-Layer  Cls/Seg Weights  $W_{cls}^l$, $W_{seg}^l$|
+| **🏗️ Hierarchical Decoupling** |  Single / Last Layer | ✅  Layer-Wise  Cls/Seg Weights  $W_{cls}^l$, $W_{seg}^l$|
 | **🤖 Backbones** |  CLIP Only |  ✅ CLIP, DINOv2-R, DINOv3 |
 | **📉 Params** | ⚠️  Text Encoder + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
 
