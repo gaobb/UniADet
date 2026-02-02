@@ -4,6 +4,7 @@
 
 - [“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
 - ["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
+- [alphaxiv blog](https://www.alphaxiv.org/overview/2601.05552)
 
 
 ## 📢 News
