@@ -2,9 +2,9 @@
 
 > Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://arxiv.org/abs/2601.05552), 2026.
 
-- [“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
-- ["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
-- [alphaxiv blog](https://www.alphaxiv.org/overview/2601.05552)
+- [“我爱计算机视觉”解读 in Chinese](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
+- ["木迅"解读 in Chinese](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
+- [alphaxiv blog in English](https://www.alphaxiv.org/overview/2601.05552)
 
 
 ## 📢 News
