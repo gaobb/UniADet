@@ -5,18 +5,24 @@
 - [“我爱计算机视觉”中文解读](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
 - ["木迅"中文解读](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
 
+
+## 📢 News
+- **[2026-01-13]**: 🚀 Initialized the official UniADet code repository.
+- **[2026-01-09]**: 📄 The UniADet paper is now available on [arXiv](https://arxiv.org/abs/2601.05552).
+
+
 ## Contents
-* [Introduction](#introduction)
-* [UniADet Framework](#uniadet-framework)
-* [Language-Free UniADet with Different Foundation Models](#language-free-uniadet-with-different-foundation-models)
-* [Comparison with State-of-the-Arts](#comparison-with-state-of-the-arts)
-* [Complexity and Efficiency Comparisons](#complexity-and-efficiency-comparisons)
-* [Ablation Studies](#ablation-studies)
-* [Comparison with Language-Dependent AnomalyCLIP](#comparison-with-language-dependent-anomalyclip)
-* [ToDo List](#todo-list)
-* [Citation](#citation)
+* [Introduction](#📝introduction)
+* [UniADet Framework](#💎uniadet-framework)
+* [Language-Free UniADet with Different Foundation Models](#📊language-free-uniadet-with-different-foundation-models)
+* [Comparison with State-of-the-Arts](#🏆comparison-with-state-of-the-arts)
+* [Complexity and Efficiency Comparisons](#🚀complexity-and-efficiency-comparisons)
+* [Ablation Studies](#🔍ablation-studies)
+* [Comparison with Language-Dependent AnomalyCLIP](#⚖️comparison-with-language-dependent-anomalyclip)
+* [ToDo List](#📌todo-list)
+* [Citation](#📖citation)
   
-## Introduction 
+## 📝 Introduction 
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
 <div align="center">
@@ -27,7 +33,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 - We fully decouple global anomaly classification and local anomaly segmentation across multi-scale hierarchical features, i.e., **learning layer-wise cls/seg weights**, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
 - Comprehensive experiments conclusively validate that our approach achieves **state-of-the-art zero-shot and few-shot performance**. Notably, our few-shot UniADet is **the first** to outperform full-shot state-of-the-art.
 
-## UniADet Framework
+## 💎 UniADet Framework
 
 <div align="center">
     <img src="./assets/UniADet-Framework.jpeg" width="80%">
@@ -48,7 +54,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 
 > Note: The performance is mesured by Image-AUROC / Pixel-AUPR, and the same below.
  
-## Comparison with State-of-the-Arts
+## 🏆 Comparison with State-of-the-Arts
 
 | Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
@@ -92,7 +98,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 > Note3: [MuSc](https://github.com/xrli-U/MuSc) is an Online algorithm that requires access to statistics from the entire test dataset to evaluate the current image.
 Therefore, it is not a strictly zero-shot AD.
 
-## Complexity and Efficiency Comparisons
+## 🚀 Complexity and Efficiency Comparisons
 
 | Shots | Methods | Models | Input Size | # Params (M) | Inf. Time (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -110,7 +116,7 @@ Therefore, it is not a strictly zero-shot AD.
 
 Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet $^†$ and UniADet $^‡$, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet $^†$ and UniADet $^‡$, respectively.
 
-## Ablation Studies
+## 🔍 Ablation Studies
 Ablation studies about different components.
 | No | DCS| DHF| CAA | Shot | MVTec  | VisA  |
 | :-- | :--: | :--: | :--: | :--: | :-- | :-- |
@@ -123,7 +129,7 @@ Ablation studies about different components.
 
 Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L/14@336px).
 
-## Comparison with Language-Dependent AnomalyCLIP
+## ⚖️ Comparison with Language-Dependent AnomalyCLIP
 - **Essential Differences**
   
 | Feature | AnomalyCLIP | **UniADet (Ours)** |
@@ -160,13 +166,13 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | 4-Shot    | DINOv3 | Not supported   |  97.1 / 45.5 |
 
 
-## ToDo List
+## 📌 ToDo List
 - [ ] release pre-trained [UniADet models]()
 - [ ] deploy [online UniADet Demo]() on huggingface
 - [ ] open training and testing code
 
 
-## Citation
+## 📖 Citation
 If you find this work useful in your research, please consider citing:
 ```
 @inproceedings{uniadet,
