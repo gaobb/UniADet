@@ -132,7 +132,7 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | **⚡  Task Decoupling** |  Shared Cls/Seg Weight $W$ | ✅  Decoupled Cls/Seg Weights $W_{cls}$, $W_{seg}$ |
 | **🏗️ Hierarchical Decoupling** |  Single / Last Layer | ✅  Layer-Wise  Cls/Seg Weights  $W_{cls}^l$, $W_{seg}^l$|
 | **🤖 Backbones** |  CLIP Only |  ✅ CLIP, DINOv2-R, DINOv3 |
-| **📉 Params** | ⚠️  Text Encoder （130M） + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
+| **📉 Params** | ⚠️  130M Text-Encoder + 5.6M (Heavy) | 🚀 0.015M or 0.020M(Efficient) |
 
 > [!IMPORTANT]
 > Note1: The [official AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) team has clarified that their initial multi-layer claim was a [code bug](https://github.com/zqhang/AnomalyCLIP/issues/18); the effective implementation relies only on the last layer.
