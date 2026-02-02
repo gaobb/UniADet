@@ -7,6 +7,7 @@
 
 
 ## 📢 News
+- **[2026-02-02]**: ✅ UniADet has been independently reproduced by a [third-party team](https://zhuanlan.zhihu.com/p/1999979404848284065), confirming our state-of-the-art results.
 - **[2026-01-13]**: 🚀 Initialized the official UniADet code repository.
 - **[2026-01-09]**: 📄 The UniADet paper is now available on [arXiv](https://arxiv.org/abs/2601.05552).
 
