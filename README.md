@@ -8,6 +8,8 @@
 
 
 ## 📢 News
+- **[2026-06-02]**: Thank you for your interest in **UniADet**. We are truly grateful for the widespread attention and valuable feedback from researchers, students, and CV practitioners worldwide, including those from the [University of Cambridge](https://www.cam.ac.uk/), [Texas A&M University](https://www.tamu.edu), [Institute of Automation of the Chinese Academy of Sciences](https://ia.cas.cn/), [Xi'an Jiaotong-Liverpool University](https://www.xjtlu.edu.cn/), [Shenzhen University](https://en.szu.edu.cn), [University of Jinan](https://www.ujn.edu.cn), and other institutions. 
+The paper is currently under peer review. The full source code and pre-trained models will be officially released upon the acceptance. We sincerely appreciate your patience and understanding.
 - **[2026-02-02]**: ✅ UniADet has been independently reproduced by a [third-party team](https://zhuanlan.zhihu.com/p/1999979404848284065), confirming our state-of-the-art results.
 - **[2026-01-13]**: 🚀 Initialized the official UniADet code repository.
 - **[2026-01-09]**: 📄 The UniADet paper is now available on [arXiv](https://arxiv.org/abs/2601.05552).
