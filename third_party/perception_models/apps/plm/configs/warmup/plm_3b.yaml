@@ -1,0 +1,78 @@
+# Template config to finetune PLM on custom dataset.
+
+name: "plm_3b_warmup"
+dump_dir: ./plm_3b_warmup
+steps: 200
+seed: 777
+optim:
+    lr: 5e-5
+    warmup: 20
+    lr_min_ratio: 0.01
+    clip: 1.0
+
+distributed:
+    fsdp_type: full_shard
+    compile: false
+    model_dtype: bf16
+    matmul_allow_tf32: false
+    selective_activation_checkpointing: false
+    full_activation_checkpointing: true
+    tp_size: 1
+
+model:
+    dim: 3072
+    n_layers: 28
+    n_heads: 24
+    n_kv_heads: 8
+    vocab_size: 128256
+    ffn_dim_multiplier: 1.0
+    multiple_of: 256
+    norm_eps: 1e-05
+    rope_theta: 500000.0
+    weight_tying: true
+    rope_scale_factor: 32
+    high_freq_factor: 4
+    max_seqlen: 3072
+    freeze_language_model: true
+    freeze_vision_model: true
+    pooling_ratio: 2
+    vision_model:
+        image_size: 448
+        patch_size: 14
+        width: 1024
+        layers: 23
+        heads: 16
+        use_cls_token: true
+        use_abs_posemb: true
+        mlp_ratio: 4.0
+        use_ln_post: false
+        pool_type: "none"
+    mlp_init:
+        use_gaussian: true
+
+data:
+    datamix: dummy_image:1,dummy_multi_image:1
+    num_workers: 4
+    batch_size: 4
+    image_res: 448
+    max_num_tiles: 1
+    max_video_frames: 8
+    vision_input_type: vanilla
+    tokenizer_path: facebook/Perception-LM-3B/tokenizer.model
+    tokenizer_name: plmchat
+    conversation_format: plm_sft
+
+profiling:
+    run: false
+
+checkpoint:
+    dump:
+        every: 500
+        keep: 1
+    init_ckpt_path: meta-llama/Llama-3.2-3B-Instruct/original
+    vision_model_path: facebook/PE-Core-L14-336-interpolated-to-448/model.pt
+    is_consolidated_model: True
+
+logging:
+    freq: 10
+    level: INFO  # Available choices for logging level are: [NOTSET, DEBUG, INFO, WARN, ERROR, FATAL, CRITICAL]

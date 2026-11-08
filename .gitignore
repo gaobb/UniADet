@@ -1,0 +1,12 @@
+__pycache__/
+*$py.class
+.vscode/
+*.vscode
+*.pyc
+*.npy
+.DS_Store
+archive/
+results/
+checkpoints/
+scripts/env.local.sh
+

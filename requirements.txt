@@ -1,0 +1,28 @@
+# Runtime pins for train.py, test.py, and the t-SNE scripts.
+# numpy must stay 1.x. torch is the cu128 build.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+torch==2.8.0+cu128
+torchvision==0.23.0+cu128
+numpy==1.26.4
+albumentations==1.4.18
+opencv-python-headless==4.11.0.86
+tifffile==2026.3.3
+Pillow==11.3.0
+ftfy==6.3.1
+regex==2025.9.18
+packaging==25.0
+einops==0.8.1
+timm==1.0.20
+huggingface_hub==0.35.3
+torchmetrics==1.6.3
+omegaconf==2.3.0
+kornia==0.8.1
+tabulate==0.9.0
+tqdm==4.67.1
+matplotlib==3.10.7
+pandas==2.3.3
+seaborn==0.13.2
+
+# t-SNE only. Install the local cu122 wheel, not the PyPI tsnecuda package:
+# pip install --force-reinstall --no-deps /path/to/tsnecuda-3.0.1+cu122-py3-none-any.whl

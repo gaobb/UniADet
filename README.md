@@ -9,6 +9,7 @@
 
 
 ## 📢 News
+- **[2026-11-08]**: 🚀 Released training and evaluation code, with docs for [environment](docs/environment.md), [data](docs/data.md), and [training / evaluation](docs/train_eval.md).
 - **[2026-06-02]**: Thank you for your interest in **UniADet**. We are truly grateful for the widespread attention and valuable feedback from researchers, students, and CV practitioners worldwide, including those from the [University of Cambridge](https://www.cam.ac.uk/), [Texas A&M University](https://www.tamu.edu), [Institute of Automation of the Chinese Academy of Sciences](https://ia.cas.cn/), [Xi'an Jiaotong-Liverpool University](https://www.xjtlu.edu.cn/), [Shenzhen University](https://en.szu.edu.cn), [University of Jinan](https://www.ujn.edu.cn), and other institutions. 
 The paper is currently under peer review. The full source code and pre-trained models will be officially released upon the acceptance. We sincerely appreciate your patience and understanding.
 - **[2026-02-02]**: ✅ UniADet has been independently reproduced by a [third-party team](https://zhuanlan.zhihu.com/p/1999979404848284065), confirming our state-of-the-art results.
@@ -17,6 +18,10 @@ The paper is currently under peer review. The full source code and pre-trained m
 
 
 ## Contents
+* [Getting Started](#🛠️getting-started)
+  * [Environment](docs/environment.md)
+  * [Data](docs/data.md)
+  * [Training and Evaluation](docs/train_eval.md)
 * [Introduction](#📝introduction)
 * [UniADet Framework](#💎uniadet-framework)
 * [Language-Free UniADet with Different Foundation Models](#📊language-free-uniadet-with-different-foundation-models)
@@ -26,12 +31,19 @@ The paper is currently under peer review. The full source code and pre-trained m
 * [Comparison with Language-Dependent AnomalyCLIP](#⚖️comparison-with-language-dependent-anomalyclip)
 * [ToDo List](#📌todo-list)
 * [Citation](#📖citation)
-  
+
+## 🛠️ Getting Started
+
+1. **[Environment](docs/environment.md)** — install, local paths, frozen backbones
+2. **[Data](docs/data.md)** — `meta.json` (generate, or download from [Google Drive](https://drive.google.com/drive/folders/TODO))
+3. **[Training and Evaluation](docs/train_eval.md)** — learnable MSDCS weights from [Hugging Face](https://huggingface.co/gaobb/UniADet) → `$UNIADET_CKPT`
+4. **Demo** — `pip install gradio && bash scripts/demo.sh`
+
 ## 📝 Introduction 
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
 <div align="center">
-    <img src="./assets/Compare-UniADet.jpg" width="80%">
+    <img src="./assets/LangDepVSLangFree.svg" width="80%">
 </div>
 
 - We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**(language-free+dual-decoupling), **efficient**(0.015M or 0.02M learnable params), **effective** (SOTA zero-/few-shot) and **general** (support VLMs and Pure VMs) framework for universal anomaly detection.
@@ -41,7 +53,7 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 ## 💎 UniADet Framework
 
 <div align="center">
-    <img src="./assets/UniADet-Framework.jpeg" width="80%">
+    <img src="./assets/UniADet-Framework-v3.svg" width="80%">
 </div>
 
 ## 📊 Language-Free UniADet with  Different Foundation Models
@@ -172,9 +184,9 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 
 
 ## 📌 ToDo List
-- [ ] release pre-trained [UniADet models]()
+- [ ] release pre-trained [MSDCS weights](https://huggingface.co/gaobb/UniADet) on Hugging Face
 - [ ] deploy [online UniADet Demo]() on huggingface
-- [ ] open training and testing code
+- [x] open training and testing code
 
 
 ## 📖 Citation
