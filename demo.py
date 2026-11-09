@@ -52,7 +52,7 @@ WINDOW = [1]
 SIGMA = 4
 LAMDA_FS = 0.8
 BACKBONES = {
-    "CLIP ViT-L/14@336px": "ViT-L/14@336px",
+    "CLIP ViT-L-14@336px": "ViT-L-14@336px",
     "DINOv2-Reg ViT-L-14": "ViT-L-14-DINOv2Reg",
     "DINOv3 ViT-L-16": "ViT-L-16-DINOv3",
 }
@@ -68,13 +68,7 @@ def image_size_of(name):
 def default_checkpoint(name, train_on="visa"):
     root = Path(os.environ["UNIADET_CKPT"])
     size = image_size_of(name)
-    # CLIP's model id contains '/', which is stored as '-' in checkpoint folders.
-    tags = [name.replace("/", "-"), name]
-    for tag in dict.fromkeys(tags):
-        path = root / f"train_on_{train_on}_zs_{tag}_imagesize{size}_1015" / "epoch_15.pth"
-        if path.is_file():
-            return str(path)
-    return str(root / f"train_on_{train_on}_zs_{tags[0]}_imagesize{size}_1015" / "epoch_15.pth")
+    return str(root / f"train_on_{train_on}_zs_{name}_imagesize{size}_1015" / "epoch_15.pth")
 
 
 def _mean_std(name):
@@ -104,7 +98,7 @@ def _load(backbone, checkpoint):
     msdcs = MSDCS(size, patch_size, embed_dim=embed_dim, layers_num=len(FEATURES))
     state = torch.load(checkpoint, map_location="cpu")
     msdcs.load_state_dict(state["msdcs"])
-    if hasattr(model, "transformer") and backbone == "ViT-L/14@336px":
+    if hasattr(model, "transformer") and backbone == "ViT-L-14@336px":
         del model.transformer
     model.to(device).eval()
     msdcs.to(device).eval()
@@ -216,10 +210,10 @@ def build_app():
                     ref3 = gr.Image(type="pil", label="Normal 3")
                     ref4 = gr.Image(type="pil", label="Normal 4")
                 mode = gr.Radio(["Zero-shot", "Few-shot"], value="Zero-shot", label="Mode")
-                backbone = gr.Radio(list(BACKBONES), value="CLIP ViT-L/14@336px", label="Backbone")
+                backbone = gr.Radio(list(BACKBONES), value="CLIP ViT-L-14@336px", label="Backbone")
                 checkpoint = gr.Textbox(
                     label="MSDCS checkpoint",
-                    value=default_checkpoint(BACKBONES["CLIP ViT-L/14@336px"]),
+                    value=default_checkpoint(BACKBONES["CLIP ViT-L-14@336px"]),
                 )
             with gr.Column():
                 anomaly_vis = gr.Image(type="numpy", label="Anomaly Results", height=480)

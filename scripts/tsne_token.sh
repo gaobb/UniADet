@@ -3,10 +3,10 @@ source "$(dirname "$0")/env.sh"
 
 dataset=mvtec
 
-for pretrained_model in "ViT-L-16-DINOv3" "ViT-L/14@336px" "ViT-L-14-DINOv2Reg"
+for pretrained_model in 'ViT-L-14@336px' 'ViT-L-14-DINOv2Reg' 'ViT-L-16-DINOv3'
 do
     case "$pretrained_model" in
-    "ViT-L/14@336px"|"ViT-L-14-DINOv2Reg")
+    "ViT-L-14@336px"|"ViT-L-14-DINOv2Reg")
         image_size=518
         ;;
     "ViT-L-16-DINOv3")

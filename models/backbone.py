@@ -52,8 +52,8 @@ def load_dino(name):
     return torch.hub.load(repo, "dinov2_vitl14_reg", source="local")
 
 def build_backbone(model_name, device):
-    if model_name == 'ViT-L/14@336px':
-        model, _ = clip.load(model_name, device=device)
+    if model_name == 'ViT-L-14@336px':
+        model, _ = clip.load("ViT-L/14@336px", device=device)
         patch_size = 14
         embed_dim = 768
     if model_name == 'VITB16_PLUS_240':

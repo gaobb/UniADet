@@ -3,7 +3,7 @@ source "$(dirname "$0")/env.sh"
 train_dataset=visa
 for test_dataset in 'mvtec' 'DTD-Synthetic' 'SDD'  'BTAD' 
 do 
-    for pretrained_model in  'ViT-L-16-DINOv3' #'ViT-L/14@336px' 'ViT-L-14-DINOv2Reg' 'ViT-L/14@336px'  #'ViT-L-16-DINOv3' 'ViT-L-16-DINOv3' 'ViT-L-14-DINOv2Reg'
+    for pretrained_model in 'ViT-L-14@336px' 'ViT-L-14-DINOv2Reg' 'ViT-L-16-DINOv3'
     do
         case "$pretrained_model" in
         "ViT-L-14@336px"|"ViT-L-14-DINOv2Reg")

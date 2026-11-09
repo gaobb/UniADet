@@ -4,13 +4,20 @@ Requires [Environment](environment.md) and [Data](data.md). Frozen backbones sta
 
 ## MSDCS weights
 
-Download the learnable MSDCS weights (layer-wise cls/seg weights \(W_{\mathrm{cls}}^{l}, W_{\mathrm{seg}}^{l}\)) from [Hugging Face](https://huggingface.co/gaobb/UniADet) into `UNIADET_CKPT`.
+Download the learnable MSDCS weights (layer-wise cls/seg weights \(W_{\mathrm{cls}}^{l}, W_{\mathrm{seg}}^{l}\)) from [Hugging Face](https://huggingface.co/csgaobb/UniADet) into `UNIADET_CKPT`. The Hub repo is **gated**: request access on the model page, then:
+
+```bash
+hf auth login
+hf download csgaobb/UniADet --local-dir "$UNIADET_CKPT"
+```
+
+Weights and code are hosted separately. This GitHub repo does not vendor the `.pth` files.
 
 MSDCS uses 5 layers, dual cls/seg embeddings, and 2 tokens (normal / anomaly): \(5 \times 2 \times 2 \times D\). Checkpoints are fp32; file size includes a small pickle header.
 
 | Backbone | \(D\) | Learnable params | Checkpoint (`.pth`) | Frozen backbone |
 | :--- | :---: | ---: | ---: | ---: |
-| CLIP `ViT-L/14@336px` | 768 | \(1.5\times10^{-2}\) M | 64.5 KB | 342.9 M |
+| CLIP `ViT-L-14@336px` | 768 | \(1.5\times10^{-2}\) M | 64.5 KB | 342.9 M |
 | DINOv2-Reg `ViT-L-14` | 1024 | \(2.0\times10^{-2}\) M | 84.5 KB | 304.4 M |
 | DINOv3 `ViT-L-16` | 1024 | \(2.0\times10^{-2}\) M | 84.5 KB | 303.2 M |
 
@@ -30,7 +37,7 @@ Trains learnable MSDCS weights on VisA and MVTec for 15 epochs, with the backbon
 $UNIADET_CKPT/train_on_<dataset>_zs_<backbone>_imagesize<H>_1015/epoch_15.pth
 ```
 
-Input size: 518 for `ViT-L/14@336px` and `ViT-L-14-DINOv2Reg`; 512 for `ViT-L-16-DINOv3`.
+Input size: 518 for `ViT-L-14@336px` and `ViT-L-14-DINOv2Reg`; 512 for `ViT-L-16-DINOv3`.
 
 ## Evaluation
 

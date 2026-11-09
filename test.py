@@ -298,7 +298,7 @@ def main(args):
     logger.info('\n' + "loading model from: " + args.checkpoint_path)
     checkpoint = torch.load(args.checkpoint_path)
     msdcs.load_state_dict(checkpoint["msdcs"])
-    if hasattr(model, "transformer") and args.pretrained_model == 'ViT-L/14@336px':
+    if hasattr(model, "transformer") and args.pretrained_model == 'ViT-L-14@336px':
        del model.transformer 
 
     model.to(device)
@@ -355,7 +355,7 @@ if __name__ == '__main__':
     # paths
     parser.add_argument("--test_data_path", type=str, default="./data/visa", help="path to test dataset")
     parser.add_argument("--save_path", type=str, default='./results/', help='path to save results')
-    parser.add_argument("--pretrained_model", type=str, default='ViT-L/14@336px', help="pre-trained model name")
+    parser.add_argument("--pretrained_model", type=str, default='ViT-L-14@336px', help="pre-trained model name")
     parser.add_argument("--checkpoint_path", type=str, default='./checkpoint/', help='path to checkpoint')
     # model
     parser.add_argument("--dataset", type=str, default='mvtec')

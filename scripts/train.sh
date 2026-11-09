@@ -2,12 +2,12 @@ source "$(dirname "$0")/env.sh"
 
 for train_dataset in  mvtec visa
 do
-for pretrained_model in  "ViT-L-16-DINOv3" 'ViT-L/14@336px' 'ViT-L-14-DINOv2Reg' #"ViT-L-16-DINOv3""ViT-L-16-DINOv3" #'ViT-L-14-DINOv2Reg' #"ViT-L-16-DINOv3" #"ViT-L-14-DINOv2Reg" #"ViT-L-16-DINOv3" #"ViT-L-16-DINOv3" #"ViT-L/14@336px" #"ViT-L-14-DINOv2Reg" #"PE-Core-G14-448" #"ViT-L/14@336px" #"ViT-L-14-DINOv2Reg"
+for pretrained_model in 'ViT-L-14@336px' 'ViT-L-14-DINOv2Reg' 'ViT-L-16-DINOv3'
 do
 
 # 根据模型名设置 image_size
 case "$pretrained_model" in
-"ViT-L/14@336px"|"ViT-L-14-DINOv2Reg")
+"ViT-L-14@336px"|"ViT-L-14-DINOv2Reg")
     image_size=518
     
     ;;

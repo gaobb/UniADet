@@ -34,7 +34,7 @@ Unset variables default to `./data`, `./pretrained`, `./checkpoints`, `./results
 
 ## Frozen backbones
 
-Put frozen backbone weights in `UNIADET_PRETRAINED` (DINOv2-Reg / DINOv3). CLIP (`ViT-L/14@336px`) is fetched by the official CLIP loader.
+Put frozen backbone weights in `UNIADET_PRETRAINED` (DINOv2-Reg / DINOv3). CLIP (`ViT-L-14@336px`) is fetched by the official CLIP loader.
 
 ```
 dinov2_vitl14_reg4_pretrain.pth

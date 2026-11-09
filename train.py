@@ -116,7 +116,7 @@ if __name__ == '__main__':
     parser.add_argument("--train_data_path", type=str, default="./data/visa", help="train dataset path")
     parser.add_argument("--save_path", type=str, default='./checkpoint', help='path to save results')
     parser.add_argument("--dataset", type=str, default='mvtec', help="train dataset name")
-    parser.add_argument("--pretrained_model", type=str, default='ViT-L/14@336px', help="pre-trained model name")
+    parser.add_argument("--pretrained_model", type=str, default='ViT-L-14@336px', help="pre-trained model name")
     parser.add_argument("--features_list", type=int, nargs="+", default=[6, 12, 18, 24], help="features used")
     parser.add_argument("--epoch", type=int, default=15, help="epochs")
     parser.add_argument("--learning_rate", type=float, default=0.001, help="learning rate")

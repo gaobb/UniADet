@@ -253,7 +253,7 @@ if __name__ == "__main__":
     train_dataset = 'visa'
     
 
-    #pretrained_model = "ViT-L/14@336px"
+    #pretrained_model = "ViT-L-14@336px"
     #imge_size = 518
     #pretrained_model = "ViT-L-16-DINOv3"
     # imge_size = 512

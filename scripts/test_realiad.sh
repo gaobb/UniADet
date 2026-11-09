@@ -3,10 +3,10 @@ source "$(dirname "$0")/env.sh"
 train_dataset=visa
 test_dataset=RealIAD
 
-for pretrained_model in  'ViT-L/14@336px'  'ViT-L-16-DINOv3'  'ViT-L-14-DINOv2Reg'
+for pretrained_model in  'ViT-L-14@336px'  'ViT-L-16-DINOv3'  'ViT-L-14-DINOv2Reg'
 do
     case "$pretrained_model" in
-    "ViT-L/14@336px"|"ViT-L-14-DINOv2Reg")
+    "ViT-L-14@336px"|"ViT-L-14-DINOv2Reg")
         image_size=518
         ;;
     "ViT-L-16-DINOv3")

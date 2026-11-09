@@ -212,7 +212,7 @@ if __name__ == '__main__':
     # paths
     parser.add_argument("--test_data_path", type=str, default="./data/visa", help="path to test dataset")
     parser.add_argument("--save_path", type=str, default="./results/", help="path to save logs")
-    parser.add_argument("--pretrained_model", type=str, default="ViT-L/14@336px", help="pre-trained model name")
+    parser.add_argument("--pretrained_model", type=str, default="ViT-L-14@336px", help="pre-trained model name")
     parser.add_argument("--dataset", type=str, default="mvtec")
     parser.add_argument("--features_list", type=int, nargs="+", default=[12, 15, 18, 21, 24], help="features used")
     parser.add_argument("--batch_size", type=int, default=8, help="batch size")
