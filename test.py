@@ -115,7 +115,7 @@ def build_prompt_memory(model, prompt_dataloader, features_list, obj_list, view_
 
     return prompt_memory
 
-def inference(model, adapter, prompt_dataloader, test_dataloader, obj_list, patch_size, view_list, cpu_eva, device, args):
+def inference(model, msdcs, prompt_dataloader, test_dataloader, obj_list, patch_size, view_list, cpu_eva, device, args):
     gt_masks, pr_masks, cls_names, gt_anomalys, pr_anomalys, query_paths = [], [], [], [], [], []
 
     if args.k_shot > 0 or args.k_shot == '-1':
@@ -157,14 +157,14 @@ def inference(model, adapter, prompt_dataloader, test_dataloader, obj_list, patc
                 prompt_feats = prompt_association(prompt_memory, target_cls_name)
                 prompt_feats = [feat.to(device) for feat in prompt_feats]
 
-        #################################### adapter
+        #################################### msdcs
         with torch.no_grad():
             # for zero-shot
-            image_logits, patch_scores = adapter(query_feats, window_list=args.window_list)
+            image_logits, patch_scores = msdcs(query_feats, window_list=args.window_list)
 
-            # adapter_flops = FlopCountAnalysis(adapter, (query_feats, args.window_list))
-            # print(f"Total Adapter FLOPs: {(adapter_flops.total()):.3e}")
-            # print(f"Total FLOPs: {(adapter_flops.total() + adapter_flops.total()):.3e}")
+            # msdcs_flops = FlopCountAnalysis(msdcs, (query_feats, args.window_list))
+            # print(f"Total MSDCS FLOPs: {(msdcs_flops.total()):.3e}")
+            # print(f"Total FLOPs: {(msdcs_flops.total() + msdcs_flops.total()):.3e}")
           
             zs_patch_score = [ls[:,1:].detach() for ls in patch_scores]
             zs_image_score = [gs.softmax(-1)[:,1:].detach() for gs in image_logits]
@@ -292,34 +292,34 @@ def main(args):
     prompt_dataloader, test_dataloader, obj_list, view_list = build_loaders(args)
   
     ###################### Loading Learners ###################### 
-    adapter = MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
-    #adapter = BS1MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
+    msdcs = MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
+    #msdcs = BS1MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
    
     logger.info('\n' + "loading model from: " + args.checkpoint_path)
-    checkpoint_adapter = torch.load(args.checkpoint_path)
-    adapter.load_state_dict(checkpoint_adapter["adapter"])
+    checkpoint = torch.load(args.checkpoint_path)
+    msdcs.load_state_dict(checkpoint["msdcs"])
     if hasattr(model, "transformer") and args.pretrained_model == 'ViT-L/14@336px':
        del model.transformer 
 
     model.to(device)
-    adapter.to(device)
+    msdcs.to(device)
 
     model.eval()
-    adapter.eval()
+    msdcs.eval()
 
-    adapter_parameters = sum(p.numel() for p in adapter.parameters()) 
+    msdcs_parameters = sum(p.numel() for p in msdcs.parameters()) 
     fixed_parameters = sum(p.numel() for p in model.parameters())
     
 
-    print(f"adapter params:{(adapter_parameters):.0f}",
-          f"learned all parameters:{(adapter_parameters)/1e+6:.3f}M",
+    print(f"msdcs params:{(msdcs_parameters):.0f}",
+          f"learned all parameters:{(msdcs_parameters)/1e+6:.3f}M",
           f"fixed params:{(fixed_parameters)/1e+6:.1f}M",
-          f"all params:{(adapter_parameters+fixed_parameters)/1e+6:.1f}M"
+          f"all params:{(msdcs_parameters+fixed_parameters)/1e+6:.1f}M"
      )
 
     ###################### Visual and Learner forward ###################### 
     gt_masks, pr_masks, cls_names, gt_anomalys, pr_anomalys, query_paths = inference(
-        model, adapter, prompt_dataloader, test_dataloader, obj_list,
+        model, msdcs, prompt_dataloader, test_dataloader, obj_list,
         patch_size, view_list, cpu_eva, device, args,
     )
 

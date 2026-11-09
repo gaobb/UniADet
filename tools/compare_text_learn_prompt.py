@@ -14,7 +14,7 @@ learned_text_features = checkpoint['learned_text_features'].cpu()  # [2, D]
 net2 = torch.load(f'./figures/consine/uniadet_mvtec_ViT-L-14@336px.pth', map_location='cpu')
 
 
-adapter_state = net2['adapter'] if 'adapter' in net2 else net2
+msdcs_state = net2["msdcs"]
 
 # 计算 static_text_features 两个向量的差向量并归一化
 # static_text_features[1] - static_text_features[0] 表示 异常 - 正常 的方向
@@ -26,12 +26,12 @@ layer_names = [12, 15, 18, 21, 24]
 class_similarities = []
 patch_similarities = []
 
-# 遍历 adapter 中所有 class_prompts 并与差向量计算相似度
+# 遍历 msdcs 中所有 class_prompts 并与差向量计算相似度
 print("=" * 60)
 print("Comparing difference vectors (abnormal - normal)")
 print("=" * 60)
 
-for key, value in adapter_state.items():
+for key, value in msdcs_state.items():
 
     #import ipdb; ipdb.set_trace()   
     if 'class_prompts' in key:
@@ -48,8 +48,8 @@ for key, value in adapter_state.items():
         
         # 获取对应的 patch_prompts (替换 class_prompts 为 patch_prompts)
         patch_key = key.replace('class_prompts', 'patch_prompts')
-        if patch_key in adapter_state:
-            patch_prompt = adapter_state[patch_key]
+        if patch_key in msdcs_state:
+            patch_prompt = msdcs_state[patch_key]
             patch_diff = patch_prompt[1] - patch_prompt[0]  # [D]
             patch_diff_norm = F.normalize(patch_diff, dim=-1)
             

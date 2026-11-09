@@ -40,24 +40,24 @@ def train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, embed_dim, patch_size = build_backbone(args.pretrained_model, device)
 
-    adapter = MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
+    msdcs = MSDCS(args.image_size, patch_size, embed_dim=embed_dim, layers_num=len(args.features_list))
        
-    print(adapter)
+    print(msdcs)
     model.to(device)
-    adapter.to(device)
+    msdcs.to(device)
    
     model.eval()
-    adapter.train()
+    msdcs.train()
 
-    adapter_parameters = sum(p.numel() for p in adapter.parameters())      
+    msdcs_parameters = sum(p.numel() for p in msdcs.parameters())      
     fixed_parameters = sum(p.numel() for p in model.parameters())
     
-    print(f"learned params:{(adapter_parameters):.0f}",
-          f"learned parameters:{(adapter_parameters)/1e+6:.1f}M",
+    print(f"learned params:{(msdcs_parameters):.0f}",
+          f"learned parameters:{(msdcs_parameters)/1e+6:.1f}M",
           f"fixed params:{(fixed_parameters)/1e+6:.1f}M",
-          f"all params:{(adapter_parameters+fixed_parameters)/1e+6:.1f}M")
+          f"all params:{(msdcs_parameters+fixed_parameters)/1e+6:.1f}M")
 
-    learnable_params = list(adapter.parameters())
+    learnable_params = list(msdcs.parameters())
 
     optimizer = torch.optim.Adam(
         learnable_params, 
@@ -84,7 +84,7 @@ def train(args):
             gt = gt.bool().int()
             
             query_feats = model(image, args.features_list)
-            image_logits, patch_scores = adapter(query_feats, window_list=args.window_list)
+            image_logits, patch_scores = msdcs(query_feats, window_list=args.window_list)
             
             global_loss, local_loss = 0, 0
             for gs in image_logits:
@@ -108,8 +108,7 @@ def train(args):
         # save model
         if (epoch + 1) % args.save_freq == 0:
             ckp_path = os.path.join(args.save_path, 'epoch_' + str(epoch + 1) + '.pth')
-            torch.save({"adapter": adapter.state_dict(), 
-                        }, ckp_path)
+            torch.save({"msdcs": msdcs.state_dict()}, ckp_path)
 
 
 if __name__ == '__main__':

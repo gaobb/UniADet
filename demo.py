@@ -58,7 +58,7 @@ BACKBONES = {
 }
 
 _LOCK = threading.Lock()
-_CACHE = {"key": None, "model": None, "adapter": None, "meta": None}
+_CACHE = {"key": None, "model": None, "msdcs": None, "meta": None}
 
 
 def image_size_of(name):
@@ -94,23 +94,23 @@ def _load(backbone, checkpoint):
     checkpoint = str(Path(checkpoint).expanduser())
     key = (backbone, checkpoint)
     if _CACHE["key"] == key:
-        return _CACHE["model"], _CACHE["adapter"], _CACHE["meta"]
+        return _CACHE["model"], _CACHE["msdcs"], _CACHE["meta"]
     if not Path(checkpoint).is_file():
         raise gr.Error(f"Checkpoint not found:\n{checkpoint}")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, embed_dim, patch_size = build_backbone(backbone, device)
     size = image_size_of(backbone)
-    adapter = MSDCS(size, patch_size, embed_dim=embed_dim, layers_num=len(FEATURES))
+    msdcs = MSDCS(size, patch_size, embed_dim=embed_dim, layers_num=len(FEATURES))
     state = torch.load(checkpoint, map_location="cpu")
-    adapter.load_state_dict(state["adapter"] if isinstance(state, dict) and "adapter" in state else state)
+    msdcs.load_state_dict(state["msdcs"])
     if hasattr(model, "transformer") and backbone == "ViT-L/14@336px":
         del model.transformer
     model.to(device).eval()
-    adapter.to(device).eval()
+    msdcs.to(device).eval()
     meta = {"device": device, "image_size": size, "patch_size": patch_size, "backbone": backbone}
-    _CACHE.update(key=key, model=model, adapter=adapter, meta=meta)
-    return model, adapter, meta
+    _CACHE.update(key=key, model=model, msdcs=msdcs, meta=meta)
+    return model, msdcs, meta
 
 
 def _encode(model, tensor, device):
@@ -119,13 +119,13 @@ def _encode(model, tensor, device):
 
 
 def _score(query_feats, prompt_feats, meta, few_shot):
-    adapter = _CACHE["adapter"]
+    msdcs = _CACHE["msdcs"]
     size = meta["image_size"]
     kernel = 2 * int(4.0 * SIGMA + 0.5) + 1
     lamda_pixel = 0.5 if few_shot else 0.1
 
     with torch.no_grad():
-        image_logits, patch_scores = adapter(query_feats, window_list=WINDOW)
+        image_logits, patch_scores = msdcs(query_feats, window_list=WINDOW)
         zs_patch = torch.concat([s[:, 1:] for s in patch_scores], dim=1).mean(dim=1)
         zs_image = torch.concat([g.softmax(-1)[:, 1:] for g in image_logits], dim=1).mean(dim=1)
         zs_patch = 1.0 / (1 + torch.exp(-15 * (zs_patch - 0.40)))
