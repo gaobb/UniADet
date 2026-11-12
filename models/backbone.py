@@ -61,27 +61,103 @@ def _hf_dinov3_to_official(hf_state):
     return official
 
 
-def _dinov3_weights_from_modelscope():
+def _hf_dinov2_reg_to_official(hf_state, hidden_size=1024):
+    import re
+
+    official = {}
+    qkv = {}
+    for raw, value in hf_state.items():
+        key = raw
+        for prefix in ("dinov2_with_registers.", "model."):
+            if key.startswith(prefix):
+                key = key[len(prefix) :]
+        if key.startswith("classifier.") or "inv_freq" in key:
+            continue
+        key = key.replace("embeddings.cls_token", "cls_token")
+        key = key.replace("embeddings.mask_token", "mask_token")
+        key = key.replace("embeddings.position_embeddings", "pos_embed")
+        key = key.replace("embeddings.register_tokens", "register_tokens")
+        key = key.replace("embeddings.patch_embeddings.projection", "patch_embed.proj")
+        key = re.sub(r"encoder\.layer\.(\d+)\.norm1", r"blocks.\1.norm1", key)
+        key = re.sub(r"encoder\.layer\.(\d+)\.norm2", r"blocks.\1.norm2", key)
+        key = re.sub(
+            r"encoder\.layer\.(\d+)\.attention\.output\.dense",
+            r"blocks.\1.attn.proj",
+            key,
+        )
+        key = re.sub(
+            r"encoder\.layer\.(\d+)\.layer_scale(\d)\.lambda1",
+            r"blocks.\1.ls\2.gamma",
+            key,
+        )
+        key = re.sub(r"encoder\.layer\.(\d+)\.mlp\.fc1", r"blocks.\1.mlp.fc1", key)
+        key = re.sub(r"encoder\.layer\.(\d+)\.mlp\.fc2", r"blocks.\1.mlp.fc2", key)
+        key = key.replace("layernorm.", "norm.")
+        match = re.match(
+            r"encoder\.layer\.(\d+)\.attention\.attention\.(query|key|value)\.(weight|bias)$",
+            key,
+        )
+        if match:
+            name = {"query": "q", "key": "k", "value": "v"}[match.group(2)]
+            qkv[(match.group(1), match.group(3), name)] = value
+            continue
+        if key == "mask_token" and value.ndim == 3:
+            value = value.squeeze(0)
+        official[key] = value
+
+    for layer, part in {(i, p) for i, p, _ in qkv}:
+        pieces = [qkv[(layer, part, name)] for name in "qkv"]
+        official[f"blocks.{layer}.attn.qkv.{part}"] = torch.cat(pieces, dim=0)
+    return official
+
+
+def _modelscope_snapshot(repo):
     from modelscope.hub.snapshot_download import snapshot_download
 
+    return Path(snapshot_download(repo))
+
+
+def _dinov3_weights_from_modelscope():
     repo = os.environ.get("UNIADET_DINOV3_MODELSCOPE", "facebook/dinov3-vitl16-pretrain-lvd1689m")
-    cache = Path(snapshot_download(repo))
-    pth = cache / "dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth"
-    if pth.is_file():
-        return pth
+    cache = _modelscope_snapshot(repo)
+    # Official dinov3_vitl16() only accepts local paths named like "*-XXXXXXXX.pth".
+    converted = cache / "dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth"
+    if converted.is_file():
+        return converted
     safetensors = cache / "model.safetensors"
     if not safetensors.is_file():
         raise FileNotFoundError(f"No DINOv3 weights under {cache}")
     from safetensors.torch import load_file
 
-    converted = cache / "dinov3_vitl16_official.pth"
     torch.save(_hf_dinov3_to_official(load_file(str(safetensors))), converted)
+    return converted
+
+
+def _dinov2_reg_weights_from_modelscope():
+    repo = os.environ.get("UNIADET_DINOV2_MODELSCOPE", "facebook/dinov2-with-registers-large")
+    cache = _modelscope_snapshot(repo)
+    converted = cache / "dinov2_vitl14_reg4_pretrain.pth"
+    if converted.is_file():
+        return converted
+    safetensors = cache / "model.safetensors"
+    if not safetensors.is_file():
+        raise FileNotFoundError(f"No DINOv2 weights under {cache}")
+    from safetensors.torch import load_file
+
+    torch.save(_hf_dinov2_reg_to_official(load_file(str(safetensors))), converted)
     return converted
 
 
 def load_dino(name):
     if name == "dinov2reg_vit_large_14":
         from dinov2.hub.backbones import dinov2_vitl14_reg
+        source = os.environ.get("UNIADET_DINOV2_SOURCE", "official")
+        if source == "modelscope":
+            # dinov2 hub rejects local paths in weights=; load manually.
+            model = dinov2_vitl14_reg(pretrained=False)
+            state = torch.load(_dinov2_reg_weights_from_modelscope(), map_location="cpu")
+            model.load_state_dict(state, strict=True)
+            return model
         return dinov2_vitl14_reg(pretrained=True)
     if name == "dinov3_vit_large_16":
         from dinov3.hub.backbones import dinov3_vitl16
