@@ -1,6 +1,4 @@
-import os
 import random
-from pathlib import Path
 
 import clip
 import numpy as np
@@ -12,11 +10,6 @@ IMAGENET_STD = (0.229, 0.224, 0.225)
 CLIP_MEAN = (0.48145466, 0.4578275, 0.40821073)
 CLIP_STD = (0.26862954, 0.26130258, 0.27577711)
 
-ROOT = Path(__file__).resolve().parent.parent
-# DINOv2 / DINOv3 checkpoints. CLIP and PE download their own weights.
-# Point UNIADET_PRETRAINED at a local directory to skip the hub download.
-PRETRAINED_DIR = Path(os.environ.get("UNIADET_PRETRAINED", ROOT / "pretrained"))
-
 def setup_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
@@ -26,30 +19,13 @@ def setup_seed(seed):
     torch.backends.cudnn.benchmark = False
 
 def load_dino(name):
-    dino_repo = {
-        "dinov3_vit_large_16": ROOT / "third_party" / "dinov3",
-        "dinov2reg_vit_large_14": ROOT / "third_party" / "dinov2",
-    }
-    dino_ckpt = {
-        "dinov3_vit_large_16": PRETRAINED_DIR / "dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth",
-        "dinov2reg_vit_large_14": PRETRAINED_DIR / "dinov2_vitl14_reg4_pretrain.pth",
-    }
-    if name not in dino_repo:
-        raise ValueError(f"Unknown encoder: {name}")
-
-    repo = str(dino_repo[name])
-    ckpt = dino_ckpt[name]
+    if name == "dinov2reg_vit_large_14":
+        from dinov2.hub.backbones import dinov2_vitl14_reg
+        return dinov2_vitl14_reg(pretrained=True)
     if name == "dinov3_vit_large_16":
-        if ckpt.is_file():
-            return torch.hub.load(repo, "dinov3_vitl16", source="local", weights=str(ckpt))
-        return torch.hub.load(repo, "dinov3_vitl16", source="local")
-
-    if ckpt.is_file():
-        model = torch.hub.load(repo, "dinov2_vitl14_reg", source="local", pretrained=False)
-        state_dict = torch.load(ckpt, map_location="cpu")
-        model.load_state_dict(state_dict, strict=False)
-        return model
-    return torch.hub.load(repo, "dinov2_vitl14_reg", source="local")
+        from dinov3.hub.backbones import dinov3_vitl16
+        return dinov3_vitl16(pretrained=True)
+    raise ValueError(f"Unknown encoder: {name}")
 
 def build_backbone(model_name, device):
     if model_name == 'ViT-L-14@336px':

@@ -9,4 +9,5 @@ archive/
 results/
 checkpoints/
 scripts/env.local.sh
+huggingface/
 

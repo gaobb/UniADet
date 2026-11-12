@@ -1,6 +1,6 @@
 # Training and Evaluation
 
-Requires [Environment](environment.md) and [Data](data.md). Frozen backbones stay in `UNIADET_PRETRAINED`; learnable MSDCS weights go in `UNIADET_CKPT`.
+Requires [Environment](environment.md) and [Data](data.md). Frozen backbones are fetched by their official loaders. Learnable MSDCS weights go in `UNIADET_CKPT`.
 
 ## MSDCS weights
 

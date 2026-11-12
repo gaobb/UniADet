@@ -24,21 +24,15 @@ cp scripts/env.local.sh.example scripts/env.local.sh
 
 ```bash
 export UNIADET_DATA=/path/to/datasets
-export UNIADET_PRETRAINED=/path/to/pre-trained-models
 ```
 
 Optional: `UNIADET_CKPT`, `UNIADET_RESULTS`, `UNIADET_DEVICE`.  
 Every `scripts/*.sh` sources `scripts/env.sh`, which loads `env.local.sh` if present.
 
-Unset variables default to `./data`, `./pretrained`, `./checkpoints`, `./results`, and GPU `0`.
+Unset variables default to `./data`, `./checkpoints`, `./results`, and GPU `0`.
 
 ## Frozen backbones
 
-Put frozen backbone weights in `UNIADET_PRETRAINED` (DINOv2-Reg / DINOv3). CLIP (`ViT-L-14@336px`) is fetched by the official CLIP loader.
-
-```
-dinov2_vitl14_reg4_pretrain.pth
-dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
-```
+CLIP, DINOv2-Reg, and DINOv3 are loaded by their official loaders (`clip.load`, `dinov2_vitl14_reg`, `dinov3_vitl16`). The first run downloads the weights into that loader's own cache. UniADet does not take a local backbone directory.
 
 Learnable MSDCS checkpoints go in `UNIADET_CKPT`; see [Training and Evaluation](train_eval.md).

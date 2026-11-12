@@ -1,14 +1,21 @@
 # UniADet
 
-> Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://arxiv.org/abs/2601.05552), 2026.
+> Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://neurips.cc/virtual/2026/poster/149035), NeurIPS 2026.
+
+![NeurIPS](https://img.shields.io/badge/NeurIPS-2026-blue.svg)
+![arXiv](https://img.shields.io/badge/arXiv-2601.05552-b31b1b.svg)
+![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-csgaobb%2FUniADet-blue)
+![HF downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhuggingface.co%2Fapi%2Fmodels%2Fcsgaobb%2FUniADet&query=downloads&label=HF%20downloads)
 
 - [首尔大学 SNU DSBA Lab 视频讲解 in Korean](https://www.youtube.com/watch?v=y_QrUOyW2c4) 
 - [“我爱计算机视觉”解读 in Chinese](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
 - ["木迅"解读 in Chinese](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
 - [alphaxiv blog in English](https://www.alphaxiv.org/overview/2601.05552)
 
-
 ## 📢 News
+
+- **[2026-11-09]**: 📦 Pre-trained MSDCS weights are on [Hugging Face](https://huggingface.co/csgaobb/UniADet) (gated: request access, then `hf download`). Code stays in this GitHub repo.
+- **[2026-09-25]**: 🎉 UniADet has been accepted to **NeurIPS 2026**. Official page: [Poster](https://neurips.cc/virtual/2026/poster/149035).
 - **[2026-11-08]**: 🚀 Released training and evaluation code, with docs for [environment](docs/environment.md), [data](docs/data.md), and [training / evaluation](docs/train_eval.md).
 - **[2026-06-02]**: Thank you for your interest in **UniADet**. We are truly grateful for the widespread attention and valuable feedback from researchers, students, and CV practitioners worldwide, including those from the [University of Cambridge](https://www.cam.ac.uk/), [Texas A&M University](https://www.tamu.edu), [Institute of Automation of the Chinese Academy of Sciences](https://ia.cas.cn/), [Xi'an Jiaotong-Liverpool University](https://www.xjtlu.edu.cn/), [Shenzhen University](https://en.szu.edu.cn), [University of Jinan](https://www.ujn.edu.cn), and other institutions. 
 The paper is currently under peer review. The full source code and pre-trained models will be officially released upon the acceptance. We sincerely appreciate your patience and understanding.
@@ -16,8 +23,8 @@ The paper is currently under peer review. The full source code and pre-trained m
 - **[2026-01-13]**: 🚀 Initialized the official UniADet code repository.
 - **[2026-01-09]**: 📄 The UniADet paper is now available on [arXiv](https://arxiv.org/abs/2601.05552).
 
-
 ## Contents
+
 * [Getting Started](#🛠️getting-started)
   * [Environment](docs/environment.md)
   * [Data](docs/data.md)
@@ -36,15 +43,14 @@ The paper is currently under peer review. The full source code and pre-trained m
 
 1. **[Environment](docs/environment.md)** — install, local paths, frozen backbones
 2. **[Data](docs/data.md)** — `meta.json` (generate, or download from [Google Drive](https://drive.google.com/drive/folders/TODO))
-3. **[Training and Evaluation](docs/train_eval.md)** — learnable MSDCS weights from [Hugging Face](https://huggingface.co/gaobb/UniADet) → `$UNIADET_CKPT`
+3. **[Training and Evaluation](docs/train_eval.md)** — learnable MSDCS weights from [Hugging Face](https://huggingface.co/csgaobb/UniADet) → `$UNIADET_CKPT`
 4. **Demo** — `pip install gradio && bash scripts/demo.sh`
 
-## 📝 Introduction 
+## 📝 Introduction
+
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
-<div align="center">
-    <img src="./assets/LangDepVSLangFree.svg" width="80%">
-</div>
+![](./assets/LangDepVSLangFree.svg)
 
 - We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**(language-free+dual-decoupling), **efficient**(0.015M or 0.02M learnable params), **effective** (SOTA zero-/few-shot) and **general** (support VLMs and Pure VMs) framework for universal anomaly detection.
 - We fully decouple global anomaly classification and local anomaly segmentation across multi-scale hierarchical features, i.e., **learning layer-wise cls/seg weights**, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
@@ -52,16 +58,14 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 
 ## 💎 UniADet Framework
 
-<div align="center">
-    <img src="./assets/UniADet-Framework-v3.svg" width="80%">
-</div>
+![](./assets/UniADet-Framework-v3.svg)
 
 ## 📊 Language-Free UniADet with  Different Foundation Models
 
 | Backbone | Shot | MVTec-AD | VisA | Real-IAD |
 | :--- | :---: | :---: | :---: | :---: |
-| **CLIP** (ViT-L/14@336px)      | **0** | 92.4 / 42.8 | 88.0 / 28.0 | 78.6 / 33.6 |
-| **CLIP** (ViT-L/14@336px)      | **4** | 97.7 / 58.8 | 93.3 / 36.7 | 84.3 / 37.2 |
+| **CLIP** (ViT-L-14@336px)      | **0** | 92.4 / 42.8 | 88.0 / 28.0 | 78.6 / 33.6 |
+| **CLIP** (ViT-L-14@336px)      | **4** | 97.7 / 58.8 | 93.3 / 36.7 | 84.3 / 37.2 |
 | | | | | |
 | **DINOv2** (Register ViT-L/14) | **0** | 93.5 / 50.9 | 91.3 / **32.7** | **82.5 / 43.1** |
 | **DINOv2** (Register ViT-L/14) | **4** | **98.7** / 65.4 | 96.9 / 45.2 | **90.3** / 48.5 |
@@ -70,12 +74,12 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | **DINOv3** (ViT-L/16)          | **4** | 98.2 / **69.0** | **97.1 / 45.5** | 88.5 / **49.8** |
 
 > Note: The performance is mesured by Image-AUROC / Pixel-AUPR, and the same below.
- 
+
 ## 🏆 Comparison with State-of-the-Arts
 
 | Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
-| **UniADet** $^‡$ | ours| $\color{red}{\checkmark}$ |0 | **93.5  / 50.9** | **91.3 / 32.7** | **82.5 / 43.1** |
+| **UniADet** $^‡$ | NeurIPS 26| $\color{red}{\checkmark}$ |0 | **93.5  / 50.9** | **91.3 / 32.7** | **82.5 / 43.1** |
 | [WinCLIP](https://github.com/zqhang/Accurate-WinCLIP-pytorch) | CVPR 23 |  $\color{green}{✘}$ | 0 | 90.4 / 18.2 | 75.5 / 5.4 | 67.0 / 3.3 |
 | [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 |  $\color{green}{✘}$  | 0 | 86.1 / - | 78.0 / - | - | -|
 | [AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) | ICLR 24 |  $\color{green}{✘}$  | 0 | 91.6 / 34.5 | 82.0 / 21.3 | 69.5 / 26.7 |
@@ -88,12 +92,11 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 | [RareCLIP](https://github.com/hjf02/RareCLIP) | ICCV 25 |  $\color{green}{✘}$  | 0 |91.5 / 46.1 | 86.1 / 27.0 | - |
 | [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  | 0 | 93.5 / 38.3 | 84.8 / 26.1 | 74.2 / 28.2 |
 
-
 | Methods | Venue | Language-Free | Shots | MVTec | VisA  | Real-IAD |
 | :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
-| **UniADet** $^‡$ | ours | $\color{red}{\checkmark}$ | 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
-| **UniADet** $^‡$ | ours| $\color{red}{\checkmark}$ | 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
-| **UniADet** $^‡$ | ours| $\color{red}{\checkmark}$ | 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
+| **UniADet** $^‡$ | NeurIPS 26 | $\color{red}{\checkmark}$ | 1 | 97.6 / 63.1 | 95.2 / 42.1 | 88.7 / 48.4 |
+| **UniADet** $^‡$ | NeurIPS 26 | $\color{red}{\checkmark}$ | 2 | 98.0 / 64.1 | 96.1 / 44.2 | 89.0 / 46.7 |
+| **UniADet** $^‡$ | NeurIPS 26 | $\color{red}{\checkmark}$ | 4 | **98.7 / 65.4** | **96.9 / 45.2** | **90.3 / 48.5** |
 | [MetaUAS](https://github.com/gaobb/MetaUAS) |NeurIPS 24 | $\color{red}{\checkmark}$ | 1 | 90.7 / 59.3 | 81.2 / 42.7 | 80.0 / 36.6 |
 | [APRIL-GAN](https://github.com/ByChelsea/VAND-APRIL-GAN) | CVPRW 23 |  $\color{green}{✘}$  | 4 | 92.8 / 54.5 | 92.6 / 32.2 | -|
 | [PromptAD](https://github.com/FuNz-0/PromptAD) | CVPR 24 |  $\color{green}{✘}$  | 4 | 96.6 / 52.9 | 89.1 / 31.5 | - |
@@ -102,39 +105,42 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  |2 | 95.7 / 55.1 | 92.2 / 40.7 | 82.9 / 37.8 |
 |  [AdaptCLIP](https://github.com/gaobb/AdaptCLIP) |AAAI 26  |  $\color{green}{✘}$  |4 | 96.6 / 57.2 | 93.1 / 41.8 | 83.9 / 39.1 |
 
-| Methods | Venue | Language-Free | Setting | MVTec | VisA  | Real-IAD |
-| :--- | :---: |  :---: | :---: | :--- | :--- | :--- |
-| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) |CVPR 25  | $\color{red}{\checkmark}$ | multi-class (full train set)| 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
-| [UniAD](https://github.com/zhiyuanyou/UniAD) |NeurIPS 24| <span style="color: red;">$\color{red}{\checkmark}$</span> |multi-class (full train set)| 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
-| [MuSc](https://github.com/xrli-U/MuSc) |ICLR 24| <span style="color: red;">$\color{red}{\checkmark}$</span> | online (full test set) | 97.8 / 62.7 | 92.8 / 45.1 | - |
+| Methods                                              | Venue      | Language-Free             | Setting                      | MVTec       | VisA        | Real-IAD    |
+| :--------------------------------------------------- | :--------: | :-----------------------: | :--------------------------: | :---------- | :---------- | :---------- |
+| [Dinomaly](https://github.com/guojiajeremy/Dinomaly) | CVPR 25    | $\color{red}{\checkmark}$ | multi-class (full train set) | 99.6 / 69.3 | 98.7 / 53.2 | 89.3 / 42.8 |
+| [UniAD](https://github.com/zhiyuanyou/UniAD)         | NeurIPS 24 | $\color{red}{\checkmark}$ | multi-class (full train set) | 96.5 / 44.7 | 90.8 / 33.6 | 83.0 / 21.1 |
+| [MuSc](https://github.com/xrli-U/MuSc)               | ICLR 24    | $\color{red}{\checkmark}$ | online (full test set)       | 97.8 / 62.7 | 92.8 / 45.1 | -           |
+
 > [!IMPORTANT] 
 > Note1: If you find that any existing zero-shot/few-shot AD methods are missing from the table above, please feel free to open an issue so we can add them.
 >
 > Note2: [Dinomaly](https://github.com/guojiajeremy/Dinomaly) and [UniAD](https://github.com/zhiyuanyou/UniAD) are multi-class unsupervised AD algorithms, and they require dataset-specific training with full normal images.
->  
+>
 > Note3: [MuSc](https://github.com/xrli-U/MuSc) is an Online algorithm that requires access to statistics from the entire test dataset to evaluate the current image.
-Therefore, it is not a strictly zero-shot AD.
+> Therefore, it is not a strictly zero-shot AD.
 
 ## 🚀 Complexity and Efficiency Comparisons
 
 | Shots | Methods | Models | Input Size | # Params (M) | Inf. Time (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **0** | AdaCLIP | CLIP ViT-L/14@336px | 518×518 | 428.8 + 1.1e+1 | 107.4 |
-| **0** | AnomalyCLIP | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 70.7 |
-| **0** | Bayes-PFL | CLIP ViT-L/14@336px | 518×518 | 427.9 + 2.7e+1 | 154.9 |
-| **0** | AdaptCLIP-Zero | CLIP ViT-L/14@336px | 518×518 | 427.9 + 6.0e-1 | 57.5 |
-| **0** | **UniADet** $^†$  | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
+| **0** | AdaCLIP | CLIP ViT-L-14@336px | 518×518 | 428.8 + 1.1e+1 | 107.4 |
+| **0** | AnomalyCLIP | CLIP ViT-L-14@336px | 518×518 | 427.9 + 5.6e+0 | 70.7 |
+| **0** | Bayes-PFL | CLIP ViT-L-14@336px | 518×518 | 427.9 + 2.7e+1 | 154.9 |
+| **0** | AdaptCLIP-Zero | CLIP ViT-L-14@336px | 518×518 | 427.9 + 6.0e-1 | 57.5 |
+| **0** | **UniADet** $^†$  | CLIP ViT-L-14@336px | 518×518 | **342.9 + 1.5e-2** | **15.7** |
 | **0** | **UniADet** $^‡$ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **41.9** |
 | **1** | InCtrl | CLIP ViT-B-16+240 | 240×240 | 208.4 + 3.0e-1 | 59.0 |
-| **1** | AnomalyCLIP+ | CLIP ViT-L/14@336px | 518×518 | 427.9 + 5.6e+0 | 76.2 |
-| **1** | AdaptCLIP | CLIP ViT-L/14@336px | 518×518 | 342.9 + 1.8e+0 | 58.7 |
-| **1** | **UniADet** $^†$ | CLIP ViT-L/14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
+| **1** | AnomalyCLIP+ | CLIP ViT-L-14@336px | 518×518 | 427.9 + 5.6e+0 | 76.2 |
+| **1** | AdaptCLIP | CLIP ViT-L-14@336px | 518×518 | 342.9 + 1.8e+0 | 58.7 |
+| **1** | **UniADet** $^†$ | CLIP ViT-L-14@336px | 518×518 | **342.9 + 1.5e-2** | **22.4** |
 | **1** | **UniADet** $^‡$ | DINOv2 ViT-L/14 | 518×518 | **303.2 + 2.0e-2** | **48.4** |
 
 Note: The number of learnable parameters (**1.5e-3** and **2.0e-3**) is not correct for our UniADet $^†$ and UniADet $^‡$, respectively. The correct is **1.5e-2** and **2.0e-2** for UniADet $^†$ and UniADet $^‡$, respectively.
 
 ## 🔍 Ablation Studies
+
 Ablation studies about different components.
+
 | No | DCS| DHF| CAA | Shot | MVTec  | VisA  |
 | :-- | :--: | :--: | :--: | :--: | :-- | :-- |
 | 0 |  $\color{green}{✘}$  |  $\color{green}{✘}$  |  $\color{green}{✘}$  |  0 | 85.4 / 36.4 | 77.9 / 26.1 |
@@ -144,11 +150,12 @@ Ablation studies about different components.
 | 4 | $\color{red}{\checkmark}$ | $\color{red}{\checkmark}$ | random |  0 | 91.3 / 41.5 | 87.5 / 26.6 |
 | 5 | $\color{red}{\checkmark}$ | $\color{red}{\checkmark}$ | $\color{red}{\checkmark}$ |  1 | **95.9 / 54.6** | **91.3 / 32.5** |
 
-Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L/14@336px).
+Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT-L-14@336px).
 
 ## ⚖️ Comparison with Language-Dependent AnomalyCLIP
+
 - **Essential Differences**
-  
+
 | Feature | AnomalyCLIP | **UniADet (Ours)** |
 | :--- | :--- | :--- |
 | **🧠 Paradigm** | 🔴 Language-Dependent | ✅ Language-Free |
@@ -159,12 +166,11 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 
 > [!IMPORTANT]
 > Note1: The [official AnomalyCLIP](https://github.com/zqhang/AnomalyCLIP) team has clarified that their initial multi-layer claim was a [code bug](https://github.com/zqhang/AnomalyCLIP/issues/18); the effective implementation relies only on the last layer.
-> 
+>
 > Note2: A naive extension of AnomalyCLIP to multiple blocks leads to significant performance degradation.
 
-
 - **Commonality**
-  
+
 | Feature | AnomalyCLIP & UniADet  |
 | :--- | :--- |
 | **Core Objective** | Learning Normal / Anomaly Weights |
@@ -172,7 +178,7 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | **Training Data** | Auxiliary Data (e.g., VisA or MVTec) |
 
 - **Performace on VisA**
-  
+
 | Shots |  Backbones | AnomalyCLIP | **UniADet (Ours)** |
 | :--- | :--- | :--- | :--- |
 | 0-Shot    | CLIP     | 82.0 / 21.3   |  88.0 / 28.0 |
@@ -182,24 +188,26 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 | 4-Shot    | DINOv2-R | Not supported |  96.9 / 45.2 |
 | 4-Shot    | DINOv3 | Not supported   |  97.1 / 45.5 |
 
-
 ## 📌 ToDo List
-- [ ] release pre-trained [MSDCS weights](https://huggingface.co/gaobb/UniADet) on Hugging Face
+
+- [x] release pre-trained [MSDCS weights](https://huggingface.co/csgaobb/UniADet) on Hugging Face
 - [ ] deploy [online UniADet Demo]() on huggingface
 - [x] open training and testing code
 
-
 ## 📖 Citation
+
 If you find this work useful in your research, please consider citing:
+
 ```
 @inproceedings{uniadet,
   title={One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection},
-  author={Gao, Bin-Bin and Wang, Chengjie},
-  booktitle={arXiv:2601.05552},
-  year={2026}
+  author={Gao, Bin-Bin},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2026},
+  url={https://neurips.cc/virtual/2026/poster/149035}
 }
 ```
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=gaobb/UniADet&type=timeline&legend=top-left)](https://www.star-history.com/#gaobb/UniADet&type=timeline&legend=top-left)
+![Star History Chart](https://api.star-history.com/svg?repos=gaobb/UniADet&type=timeline&legend=top-left)
