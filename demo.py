@@ -57,6 +57,7 @@ BACKBONES = {
     "DINOv2-Reg ViT-L-14": "ViT-L-14-DINOv2Reg",
     "DINOv3 ViT-L-16": "ViT-L-16-DINOv3",
 }
+DEFAULT_BACKBONE = "DINOv3 ViT-L-16" if "DINOv3 ViT-L-16" in BACKBONES else next(iter(BACKBONES))
 
 EXAMPLES = [
     ('Brain MRI · Medical', 'Medical',
@@ -303,8 +304,8 @@ def build_app():
                     ref3 = gr.Image(type="pil", label="Reference 3")
                     ref4 = gr.Image(type="pil", label="Reference 4")
                 mode = gr.Radio(["Zero-shot", "Few-shot"], value="Zero-shot", label="Mode")
-                backbone = gr.Radio(list(BACKBONES), value="DINOv3 ViT-L-16", label="Backbone")
-                checkpoint = gr.State(on_backbone("DINOv3 ViT-L-16", "mix"))
+                backbone = gr.Radio(list(BACKBONES), value=DEFAULT_BACKBONE, label="Backbone")
+                checkpoint = gr.State(on_backbone(DEFAULT_BACKBONE, "mix"))
                 with gr.Accordion("UniADet checkpoint (Pre-trained Auxiliary Dataset)", open=False):
                     checkpoint_source = gr.Radio(
                         list(CHECKPOINT_SOURCES), value="Mix", show_label=False,
