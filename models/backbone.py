@@ -20,6 +20,14 @@ def setup_seed(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
+def _dinov3_rope_periods(embed_dim=1024, num_heads=16, base=100.0):
+    # HF/ModelScope omit rope buffers; rebuild the official bf16-rounded periods.
+    head_dim = embed_dim // num_heads
+    quarter = head_dim // 4
+    periods = base ** (2 * torch.arange(quarter, dtype=torch.float32) / (head_dim // 2))
+    return periods.to(torch.bfloat16).to(torch.float32)
+
+
 def _hf_dinov3_to_official(hf_state):
     import re
 
@@ -27,7 +35,8 @@ def _hf_dinov3_to_official(hf_state):
     qkv = {}
     for raw, value in hf_state.items():
         key = raw[6:] if raw.startswith("model.") else raw
-        if "inv_freq" in key:
+        # HF drops inv_freq / bias_mask / k bias; rebuild them after the loop.
+        if "inv_freq" in key or "bias_mask" in key or key.endswith("k_proj.bias"):
             continue
         key = key.replace("embeddings.cls_token", "cls_token")
         key = key.replace("embeddings.mask_token", "mask_token")
@@ -49,15 +58,27 @@ def _hf_dinov3_to_official(hf_state):
             continue
         official[key] = value
 
-    for layer, part in {(i, p) for i, p, _ in qkv}:
-        pieces = []
-        ref = qkv.get((layer, part, "q"))
-        for name in "qkv":
-            tensor = qkv.get((layer, part, name))
-            if tensor is None:
-                tensor = torch.zeros_like(ref)
-            pieces.append(tensor)
-        official[f"blocks.{layer}.attn.qkv.{part}"] = torch.cat(pieces, dim=0)
+    layers = sorted({int(i) for i, _, _ in qkv})
+    embed_dim = None
+    for layer in layers:
+        ref = qkv.get((str(layer), "weight", "q"))
+        if ref is None:
+            continue
+        embed_dim = ref.shape[0]
+        # Official mask_k_bias zeros the K bias; HF checkpoints omit k_proj.bias.
+        weight = torch.cat([qkv[(str(layer), "weight", name)] for name in "qkv"], dim=0)
+        q_bias = qkv.get((str(layer), "bias", "q"), torch.zeros(embed_dim))
+        v_bias = qkv.get((str(layer), "bias", "v"), torch.zeros(embed_dim))
+        bias = torch.cat([q_bias, torch.zeros(embed_dim), v_bias], dim=0)
+        official[f"blocks.{layer}.attn.qkv.weight"] = weight
+        official[f"blocks.{layer}.attn.qkv.bias"] = bias
+        official[f"blocks.{layer}.attn.qkv.bias_mask"] = torch.cat(
+            [torch.ones(embed_dim), torch.zeros(embed_dim), torch.ones(embed_dim)]
+        )
+
+    if embed_dim is None:
+        raise ValueError("DINOv3 conversion found no attention layers")
+    official["rope_embed.periods"] = _dinov3_rope_periods(embed_dim=embed_dim)
     return official
 
 
@@ -114,7 +135,24 @@ def _hf_dinov2_reg_to_official(hf_state, hidden_size=1024):
 def _modelscope_snapshot(repo):
     from modelscope.hub.snapshot_download import snapshot_download
 
-    return Path(snapshot_download(repo))
+    # Keep ModelScope caches under HF_HOME so Space restarts reuse downloads.
+    root = Path(os.environ.get("HF_HOME", str(Path.home() / ".cache/huggingface"))) / "modelscope"
+    root.mkdir(parents=True, exist_ok=True)
+    return Path(snapshot_download(repo, cache_dir=str(root)))
+
+
+def _torch_load(path):
+    try:
+        return torch.load(path, map_location="cpu", weights_only=True)
+    except TypeError:
+        return torch.load(path, map_location="cpu")
+
+
+def _dinov3_converted_ok(path):
+    if not path.is_file():
+        return False
+    state = _torch_load(path)
+    return "rope_embed.periods" in state and "blocks.0.attn.qkv.bias_mask" in state
 
 
 def _dinov3_weights_from_modelscope():
@@ -122,11 +160,20 @@ def _dinov3_weights_from_modelscope():
     cache = _modelscope_snapshot(repo)
     # Official dinov3_vitl16() only accepts local paths named like "*-XXXXXXXX.pth".
     converted = cache / "dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth"
-    if converted.is_file():
+    if _dinov3_converted_ok(converted):
         return converted
+    if converted.is_file():
+        converted.unlink()
     safetensors = cache / "model.safetensors"
     if not safetensors.is_file():
-        raise FileNotFoundError(f"No DINOv3 weights under {cache}")
+        # ModelScope may nest the snapshot one level deeper depending on version.
+        matches = list(cache.rglob("model.safetensors"))
+        if not matches:
+            raise FileNotFoundError(f"No DINOv3 weights under {cache}")
+        safetensors = matches[0]
+        converted = safetensors.parent / converted.name
+        if _dinov3_converted_ok(converted):
+            return converted
     from safetensors.torch import load_file
 
     torch.save(_hf_dinov3_to_official(load_file(str(safetensors))), converted)
@@ -141,7 +188,13 @@ def _dinov2_reg_weights_from_modelscope():
         return converted
     safetensors = cache / "model.safetensors"
     if not safetensors.is_file():
-        raise FileNotFoundError(f"No DINOv2 weights under {cache}")
+        matches = list(cache.rglob("model.safetensors"))
+        if not matches:
+            raise FileNotFoundError(f"No DINOv2 weights under {cache}")
+        safetensors = matches[0]
+        converted = safetensors.parent / converted.name
+        if converted.is_file():
+            return converted
     from safetensors.torch import load_file
 
     torch.save(_hf_dinov2_reg_to_official(load_file(str(safetensors))), converted)
@@ -155,7 +208,7 @@ def load_dino(name):
         if source == "modelscope":
             # dinov2 hub rejects local paths in weights=; load manually.
             model = dinov2_vitl14_reg(pretrained=False)
-            state = torch.load(_dinov2_reg_weights_from_modelscope(), map_location="cpu")
+            state = _torch_load(_dinov2_reg_weights_from_modelscope())
             model.load_state_dict(state, strict=True)
             return model
         return dinov2_vitl14_reg(pretrained=True)
@@ -163,7 +216,10 @@ def load_dino(name):
         from dinov3.hub.backbones import dinov3_vitl16
         source = os.environ.get("UNIADET_DINOV3_SOURCE", "official")
         if source == "modelscope":
-            return dinov3_vitl16(pretrained=True, weights=str(_dinov3_weights_from_modelscope()), check_hash=False)
+            # Load manually so converted Hub weights do not go through URL hash checks.
+            model = dinov3_vitl16(pretrained=False)
+            model.load_state_dict(_torch_load(_dinov3_weights_from_modelscope()), strict=True)
+            return model
         return dinov3_vitl16(pretrained=True)
     raise ValueError(f"Unknown encoder: {name}")
 
