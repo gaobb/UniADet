@@ -1,10 +1,10 @@
 # Training and Evaluation
 
-Requires [Environment](environment.md) and [Data](data.md). Frozen backbones are fetched by their official loaders. Learnable MSDCS weights go in `UNIADET_CKPT`.
+Requires [Environment](environment.md) and [Data](data.md). Frozen backbones are fetched by their official loaders. Pre-trained UniADet weights go in `UNIADET_CKPT`.
 
-## MSDCS weights
+## Pre-trained UniADet weights
 
-Download the learnable MSDCS weights (layer-wise cls/seg weights \(W_{\mathrm{cls}}^{l}, W_{\mathrm{seg}}^{l}\)) from [Hugging Face](https://huggingface.co/csgaobb/UniADet) into `UNIADET_CKPT`. The Hub repo is **gated**: request access on the model page, then:
+Download the pre-trained UniADet weights (MSDCS: layer-wise cls/seg weights \(W_{\mathrm{cls}}^{l}, W_{\mathrm{seg}}^{l}\)) from [Hugging Face](https://huggingface.co/csgaobb/UniADet) into `UNIADET_CKPT`. The Hub repo is **gated**: request access on the model page, then:
 
 ```bash
 hf auth login
@@ -21,9 +21,9 @@ MSDCS uses 5 layers, dual cls/seg embeddings, and 2 tokens (normal / anomaly): \
 | DINOv2-Reg `ViT-L-14` | 1024 | \(2.0\times10^{-2}\) M | 84.5 KB | 304.4 M |
 | DINOv3 `ViT-L-16` | 1024 | \(2.0\times10^{-2}\) M | 84.5 KB | 303.2 M |
 
-VisA-trained and MVTec-trained MSDCS checkpoints have the same size. The frozen backbone is **not** stored in the `.pth`; only MSDCS weights are.
+VisA-trained and MVTec-trained checkpoints have the same size. The frozen backbone is **not** stored in the `.pth`; only the MSDCS weights are.
 
-To evaluate the paper checkpoints, skip training and place the Hugging Face MSDCS weights under the same `UNIADET_CKPT` layout as below.
+To evaluate the paper checkpoints, skip training and place the Hugging Face UniADet weights under the same `UNIADET_CKPT` layout as below.
 
 ## Training
 
@@ -31,7 +31,7 @@ To evaluate the paper checkpoints, skip training and place the Hugging Face MSDC
 bash scripts/train.sh
 ```
 
-Trains learnable MSDCS weights on VisA and MVTec for 15 epochs, with the backbone frozen (CLIP / DINOv2-Reg / DINOv3):
+Trains UniADet MSDCS weights on VisA and MVTec for 15 epochs, with the backbone frozen (CLIP / DINOv2-Reg / DINOv3):
 
 ```
 $UNIADET_CKPT/train_on_<dataset>_zs_<backbone>_imagesize<H>_1015/epoch_15.pth
@@ -54,9 +54,11 @@ Metrics: Image AUROC / AP / F1-max and Pixel AUROC / AP / F1-max / AUPRO. Output
 
 ## Demo
 
+Try the [online UniADet Demo](https://huggingface.co/spaces/csgaobb/UniADet), or run locally:
+
 ```bash
 pip install gradio
 bash scripts/demo.sh
 ```
 
-Zero-shot takes a query image. Few-shot also takes 1–4 normal images of the same object. Defaults follow the paper protocol (`lamda_pixel` 0.1 / 0.5, `lamda_fs` 0.8). The app opens at `http://0.0.0.0:7860`.
+Zero-shot takes a query image. Few-shot also takes 1–4 normal images of the same object. Defaults follow the paper protocol (`lamda_pixel` 0.1 / 0.5, `lamda_fs` 0.8). The local app opens at `http://0.0.0.0:7860`.

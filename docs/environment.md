@@ -35,4 +35,4 @@ Unset variables default to `./data`, `./checkpoints`, `./results`, and GPU `0`.
 
 CLIP, DINOv2-Reg, and DINOv3 are loaded by their official loaders (`clip.load`, `dinov2_vitl14_reg`, `dinov3_vitl16`). The first run downloads the weights into that loader's own cache. UniADet does not take a local backbone directory.
 
-Learnable MSDCS checkpoints go in `UNIADET_CKPT`; see [Training and Evaluation](train_eval.md).
+Pre-trained UniADet weights go in `UNIADET_CKPT`; see [Training and Evaluation](train_eval.md).

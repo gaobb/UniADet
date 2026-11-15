@@ -2,23 +2,20 @@
 
 > Official PyTorch Implementation of [One Language-Free Foundation Model Is Enough for Universal Vision Anomaly Detection](https://neurips.cc/virtual/2026/poster/149035), NeurIPS 2026.
 
-![NeurIPS](https://img.shields.io/badge/NeurIPS-2026-blue.svg)
-![arXiv](https://img.shields.io/badge/arXiv-2601.05552-b31b1b.svg)
-![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-csgaobb%2FUniADet-blue)
-![HF downloads](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhuggingface.co%2Fapi%2Fmodels%2Fcsgaobb%2FUniADet&query=downloads&label=HF%20downloads)
-
-- [首尔大学 SNU DSBA Lab 视频讲解 in Korean](https://www.youtube.com/watch?v=y_QrUOyW2c4) 
-- [“我爱计算机视觉”解读 in Chinese](https://mp.weixin.qq.com/s/AoMRcYMdJmAb355pzoPbhQ)
-- ["木迅"解读 in Chinese](https://mp.weixin.qq.com/s/AljAi1wMlhSi954HQE86nQ)
-- [alphaxiv blog in English](https://www.alphaxiv.org/overview/2601.05552)
+<p align="center">
+  <a href="https://neurips.cc/virtual/2026/poster/149035"><img src="https://img.shields.io/badge/NeurIPS-2026-blue.svg" alt="NeurIPS"></a>
+  <!-- TODO: update arXiv link -->
+  <img src="https://img.shields.io/badge/arXiv-2601.05552-b31b1b.svg" alt="arXiv">
+  <a href="https://huggingface.co/csgaobb/UniADet"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fhuggingface.co%2Fapi%2Fmodels%2Fcsgaobb%2FUniADet&query=downloads&label=%F0%9F%A4%97%20UniADet%20Models&color=blue" alt="UniADet Models"></a>
+  <a href="https://huggingface.co/spaces/csgaobb/UniADet"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20UniADet%20Demo-Spaces-yellow" alt="UniADet Demo"></a>
+</p>
 
 ## 📢 News
 
-- **[2026-11-09]**: 📦 Pre-trained MSDCS weights are on [Hugging Face](https://huggingface.co/csgaobb/UniADet) (gated: request access, then `hf download`). Code stays in this GitHub repo.
-- **[2026-09-25]**: 🎉 UniADet has been accepted to **NeurIPS 2026**. Official page: [Poster](https://neurips.cc/virtual/2026/poster/149035).
+- **[2026-11-09]**: 📦 Pre-trained UniADet weights are on [Hugging Face](https://huggingface.co/csgaobb/UniADet) (gated: request access, then `hf download`).
 - **[2026-11-08]**: 🚀 Released training and evaluation code, with docs for [environment](docs/environment.md), [data](docs/data.md), and [training / evaluation](docs/train_eval.md).
-- **[2026-06-02]**: Thank you for your interest in **UniADet**. We are truly grateful for the widespread attention and valuable feedback from researchers, students, and CV practitioners worldwide, including those from the [University of Cambridge](https://www.cam.ac.uk/), [Texas A&M University](https://www.tamu.edu), [Institute of Automation of the Chinese Academy of Sciences](https://ia.cas.cn/), [Xi'an Jiaotong-Liverpool University](https://www.xjtlu.edu.cn/), [Shenzhen University](https://en.szu.edu.cn), [University of Jinan](https://www.ujn.edu.cn), and other institutions. 
-The paper is currently under peer review. The full source code and pre-trained models will be officially released upon the acceptance. We sincerely appreciate your patience and understanding.
+- **[2026-09-25]**: 🎉 UniADet has been accepted to **NeurIPS 2026**. Official page: [Poster](https://neurips.cc/virtual/2026/poster/149035).
+- **[2026-06-02]**: Thank you for your interest in **UniADet**. We are truly grateful for the widespread attention and valuable feedback from researchers, students, and CV practitioners worldwide, including those from the [University of Cambridge](https://www.cam.ac.uk/), [Texas A&M University](https://www.tamu.edu), [Institute of Automation of the Chinese Academy of Sciences](https://ia.cas.cn/), [Xi'an Jiaotong-Liverpool University](https://www.xjtlu.edu.cn/), [Shenzhen University](https://en.szu.edu.cn), [University of Jinan](https://www.ujn.edu.cn), and other institutions.
 - **[2026-02-02]**: ✅ UniADet has been independently reproduced by a [third-party team](https://zhuanlan.zhihu.com/p/1999979404848284065), confirming our state-of-the-art results.
 - **[2026-01-13]**: 🚀 Initialized the official UniADet code repository.
 - **[2026-01-09]**: 📄 The UniADet paper is now available on [arXiv](https://arxiv.org/abs/2601.05552).
@@ -43,14 +40,16 @@ The paper is currently under peer review. The full source code and pre-trained m
 
 1. **[Environment](docs/environment.md)** — install, local paths, frozen backbones
 2. **[Data](docs/data.md)** — `meta.json` (generate, or download from [Google Drive](https://drive.google.com/drive/folders/TODO))
-3. **[Training and Evaluation](docs/train_eval.md)** — learnable MSDCS weights from [Hugging Face](https://huggingface.co/csgaobb/UniADet) → `$UNIADET_CKPT`
-4. **Demo** — `pip install gradio && bash scripts/demo.sh`
+3. **[Training and Evaluation](docs/train_eval.md)** — pre-trained UniADet weights from [Hugging Face](https://huggingface.co/csgaobb/UniADet) → `$UNIADET_CKPT`
+4. **Demo** — try the [online UniADet Demo](https://huggingface.co/spaces/csgaobb/UniADet), or run locally with `pip install gradio && bash scripts/demo.sh`
 
 ## 📝 Introduction
 
 UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly detection framework.  It achieves superior performance outperforming state-of-the-art **language-dependent** Zero- and Few-shot AD models while also exhibiting remarkable simplicity and efficiency.
 
-![](./assets/LangDepVSLangFree.svg)
+<p align="center">
+  <img src="./assets/LangDepVSLangFree.svg" alt="Language-dependent vs language-free anomaly detection">
+</p>
 
 - We rethink vision-language ADs and find that language prompts and encoders are unnecessary. This insight leads to an embarrassingly **simple**(language-free+dual-decoupling), **efficient**(0.015M or 0.02M learnable params), **effective** (SOTA zero-/few-shot) and **general** (support VLMs and Pure VMs) framework for universal anomaly detection.
 - We fully decouple global anomaly classification and local anomaly segmentation across multi-scale hierarchical features, i.e., **learning layer-wise cls/seg weights**, effectively mitigating the learning conflict between different feature manifolds and substantially improving AD performance.
@@ -58,7 +57,9 @@ UniADet is a **language-free** universal (Zero- and Few-shot) visual anomaly det
 
 ## 💎 UniADet Framework
 
-![](./assets/UniADet-Framework-v3.svg)
+<p align="center">
+  <img src="./assets/UniADet-Framework-v3.svg" alt="UniADet Framework">
+</p>
 
 ## 📊 Language-Free UniADet with  Different Foundation Models
 
@@ -190,8 +191,8 @@ Note: The ablation studies are conducted by UniADet $^†$ (i.e., using CLIP ViT
 
 ## 📌 ToDo List
 
-- [x] release pre-trained [MSDCS weights](https://huggingface.co/csgaobb/UniADet) on Hugging Face
-- [ ] deploy [online UniADet Demo]() on huggingface
+- [x] release [pre-trained UniADet weights](https://huggingface.co/csgaobb/UniADet) on Hugging Face
+- [x] deploy [online UniADet Demo](https://huggingface.co/spaces/csgaobb/UniADet) on Hugging Face Spaces
 - [x] open training and testing code
 
 ## 📖 Citation
@@ -210,4 +211,6 @@ If you find this work useful in your research, please consider citing:
 
 ## Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=gaobb/UniADet&type=timeline&legend=top-left)
+<p align="center">
+  <img src="https://api.star-history.com/svg?repos=gaobb/UniADet&type=timeline&legend=top-left" alt="Star History Chart">
+</p>
